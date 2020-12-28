@@ -1,5 +1,4 @@
 import os
-from typing import Generator
 
 import numpy as np
 from transformers import AutoModelForCausalLM, AutoTokenizer
