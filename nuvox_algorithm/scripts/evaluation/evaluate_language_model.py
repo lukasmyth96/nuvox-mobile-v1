@@ -26,6 +26,9 @@ if __name__ == '__main__':
     tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
     model = AutoModelForCausalLM.from_pretrained(MODEL_NAME)
 
+    # List[bool], whether the top predicted word is correct for each word.
+    top_1_accuracy_list = []
+
     # List[bool], whether the true word was in top-k for all words.
     top_k_accuracy_list = []
 
@@ -57,16 +60,18 @@ if __name__ == '__main__':
 
                 # Track metrics
                 true_next_token_id = input_ids[0, position + 1]
-                is_true_token_in_top_k = true_next_token_id in ranked_token_ids[:K]
-                top_k_accuracy_list.append(is_true_token_in_top_k)
+                top_1_accuracy_list.append(true_next_token_id == ranked_token_ids[0])
+                top_k_accuracy_list.append(true_next_token_id in ranked_token_ids[:K])
                 true_token_rank = ranked_token_ids.index(true_next_token_id) + 1
                 true_token_prob = ranked_token_probs[true_token_rank - 1]
                 true_token_rank_list.append(true_token_rank)
                 true_token_prob_list.append(true_token_prob)
 
+        top_1_acc = np.mean(top_1_accuracy_list)
         top_k_acc = np.mean(top_k_accuracy_list)
         avg_true_token_rank = np.mean(true_token_rank_list)
         avg_true_token_prob = np.mean(true_token_prob_list)
-        file_names_tqdm.set_description(desc=f'top_{K}_acc: {top_k_acc:.2%}'
+        file_names_tqdm.set_description(desc=f'| top_1_acc: {top_1_acc:.2%}'
+                                             f'| top_{K}_acc: {top_k_acc:.2%}'
                                              f'| avg_true_token_rank: {avg_true_token_rank:.1f}'
                                              f'| avg_true_token_prob: {avg_true_token_prob:.1f}')
