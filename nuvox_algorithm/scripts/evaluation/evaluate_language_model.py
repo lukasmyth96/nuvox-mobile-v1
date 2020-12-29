@@ -24,7 +24,7 @@ if __name__ == '__main__':
     # Configuration
     MODEL_NAME = 'gpt2'
     DATASET_DIR = '/home/luka/Downloads/openwebtext'  # directory containing .txt files.
-    FILTER_BY_KEY_ID_SEQUENCE = False
+    FILTER_BY_KEY_ID_SEQUENCE = True
     K = 3
 
     tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
@@ -90,9 +90,9 @@ if __name__ == '__main__':
                     )
 
                 # Track metrics
-                top_1_accuracy_list.append(true_next_token_id == ranked_token_ids[0])
-                top_k_accuracy_list.append(true_next_token_id in ranked_token_ids[:K])
-                true_token_rank = ranked_token_ids.index(true_next_token_id) + 1
+                top_1_accuracy_list.append(true_next_token_id.item() == ranked_token_ids[0])
+                top_k_accuracy_list.append(true_next_token_id.item() in ranked_token_ids[:K])
+                true_token_rank = ranked_token_ids.index(true_next_token_id.item()) + 1
                 true_token_prob = ranked_token_probs[true_token_rank - 1]
                 true_token_rank_list.append(true_token_rank)
                 true_token_prob_list.append(true_token_prob)
