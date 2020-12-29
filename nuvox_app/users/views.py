@@ -14,7 +14,7 @@ class LoginView(auth_views.LoginView):
 
 
 class SignUpView(SuccessMessageMixin, CreateView):
-    template_name = 'users/register.html'
+    template_name = 'users/signup.html'
     success_url = reverse_lazy('login')
     form_class = SignUpForm
-    success_message = "Your profile was created successfully"
+    success_message = "Your account was created successfully"
