@@ -77,4 +77,4 @@ if __name__ == '__main__':
         file_names_tqdm.set_description(desc=f'| top_1_acc: {top_1_acc:.2%}'
                                              f'| top_{K}_acc: {top_k_acc:.2%}'
                                              f'| avg_true_token_rank: {avg_true_token_rank:.1f}'
-                                             f'| avg_true_token_prob: {avg_true_token_prob:.1f}')
+                                             f'| avg_true_token_prob: {avg_true_token_prob:.3f}')
