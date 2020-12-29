@@ -124,7 +124,7 @@ STATIC_URL = '/static/'
 
 AUTH_USER_MODEL = 'users.User'
 
-LOGIN_REDIRECT_URL = 'submit-session'
+LOGIN_REDIRECT_URL = 'keyboard'
 LOGIN_URL = 'login'
 LOGOUT_REDIRECT_URL = 'login'
 
