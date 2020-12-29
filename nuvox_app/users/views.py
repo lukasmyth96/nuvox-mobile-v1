@@ -8,7 +8,7 @@ from .forms import SignUpForm
 
 
 class LoginView(auth_views.LoginView):
-    template_name = 'admin/login.html'
+    template_name = 'users/login.html'
     form_class = AuthenticationForm
     authentication_form = AuthenticationForm
 
