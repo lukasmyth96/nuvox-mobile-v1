@@ -2,9 +2,11 @@
 {% load crispy_forms_filters %}
 
 {% block content %}
-  <form method="post">
-    {% csrf_token %}
-    {{ form|crispy }}
-    <button type="submit">Sign up</button>
-  </form>
+    <div style="text-align: center; margin: 5% 25%">
+        <form method="post">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <button type="submit" class="btn btn-primary">Sign up</button>
+        </form>
+    </div>
 {% endblock %}
