@@ -67,7 +67,7 @@
     // Keep track of the mouse button being pressed and draw a dot at current location
     function sketchpad_mouseDown() {
         mouseDown=1;
-        drawLine(ctx,mouseX,mouseY,12);
+        drawLine(ctx,mouseX,mouseY,8);
     }
 
     // Keep track of the mouse button being released
@@ -89,7 +89,7 @@
 
         // Draw a dot if the mouse button is currently being pressed
         if (mouseDown==1) {
-            drawLine(ctx,mouseX,mouseY,12);
+            drawLine(ctx,mouseX,mouseY,8);
         }
     }
 
@@ -113,7 +113,7 @@
         // Update the touch co-ordinates
         getTouchPos();
 
-        drawLine(ctx,touchX,touchY,12);
+        drawLine(ctx,touchX,touchY,8);
 
         // Prevents an additional mousedown event being triggered
         event.preventDefault();
@@ -135,7 +135,7 @@
         getTouchPos(e);
 
         // During a touchmove event, unlike a mousemove event, we don't need to check if the touch is engaged, since there will always be contact with the screen by definition.
-        drawLine(ctx,touchX,touchY,12);
+        drawLine(ctx,touchX,touchY,8);
 
         // Prevent a scrolling action as a result of this touchmove triggering.
         event.preventDefault();
@@ -196,29 +196,24 @@
 }
 
 #sketchpad {
-    float:left;
-    height:300px;
-    width:400px;
+    height:600px;
+    width:600px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
     border:2px solid #888;
     border-radius:4px;
     position:relative; /* Necessary for correct mouse co-ords in Firefox */
     background-image:url({% static "nuvox_keyboard_img.png" %});
     background-size: 100% 100%;
 }
-#clearbutton {
-    font-size: 15px;
-    padding: 10px;
-    -webkit-appearance: none;
-    background: #eee;
-    border: 1px solid #888;
-}
+
 </style>
 
     <div id="sketchpadapp">
-
-    <canvas id="sketchpad" height="300" width="400">
-    </canvas>
-
+        <!--Note repeating width and height here seems to be necessary for some reason-->
+        <canvas id="sketchpad" height="600" width="600">
+        </canvas>
     </div>
     <script type="text/javascript">
         init();  // calling here because you can't use onload on a div
