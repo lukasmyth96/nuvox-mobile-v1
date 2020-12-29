@@ -1,11 +1,15 @@
 import os
+from typing import List, Tuple
 
 import numpy as np
-from transformers import AutoModelForCausalLM, AutoTokenizer
+from transformers import AutoModelForCausalLM, AutoTokenizer, PreTrainedTokenizer
 from torch.nn import functional as F
 from tqdm import tqdm
 
 from nuvox_algorithm.utils.io_funcs import read_text_file
+from nuvox_algorithm.core import Keyboard, nuvox_key_list
+from nuvox_algorithm.scripts.evaluation.filter_predictions_by_key_id_sequence import filter_predictions_by_key_id_sequence
+
 
 if __name__ == '__main__':
     """
@@ -20,10 +24,12 @@ if __name__ == '__main__':
     # Configuration
     MODEL_NAME = 'gpt2'
     DATASET_DIR = '/home/luka/Downloads/openwebtext'  # directory containing .txt files.
+    FILTER_BY_KEY_ID_SEQUENCE = False
     K = 3
 
     tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
     model = AutoModelForCausalLM.from_pretrained(MODEL_NAME)
+    keyboard = Keyboard(keys=nuvox_key_list)
 
     # List[bool], whether the top predicted word is correct for each word.
     top_1_accuracy_list = []
@@ -53,6 +59,11 @@ if __name__ == '__main__':
                 print(f'Following exception raised during model prediction: {exc}')
                 continue
             for position in range(input_ids.shape[1] - 1):
+
+                # Obtain true next token in sentence.
+                true_next_token_id = input_ids[0, position + 1]
+                true_next_token = tokenizer._convert_id_to_token(true_next_token_id)
+
                 # Predict and rank tokens
                 next_token_logits = model_output.logits[:, position, :]
                 probs = F.softmax(next_token_logits, dim=-1)
@@ -61,8 +72,24 @@ if __name__ == '__main__':
                 ranked_token_probs = ranked.values.tolist()[0]
                 # top_k_tokens = [tokenizer.decode(token_id) for token_id in ranked_token_ids[:K]] # only used for debugging.
 
+                if FILTER_BY_KEY_ID_SEQUENCE:
+                    # Filter ranked predictions to only include tokens whose KIS match that of the
+                    # true next token. This mimics the behaviour of the nuvox algorithm in the
+                    # perfect case where the trace algorithm correctly predicts with 100% confidence
+                    # the intended KIS. The performance under this assumption will give a reasonable
+                    # upper bound for the performance that can be achieved.
+                    ranked_token_ids, ranked_token_probs = filter_predictions_by_key_id_sequence(
+                        ranked_token_ids=ranked_token_ids,
+                        ranked_token_probs=ranked_token_probs,
+                        tokenizer=tokenizer,
+                        keyboard=keyboard,
+                        target_key_id_sequence=keyboard.text_to_key_id_sequence(
+                            text=true_next_token,
+                            skip_invalid_chars=True
+                        ),
+                    )
+
                 # Track metrics
-                true_next_token_id = input_ids[0, position + 1]
                 top_1_accuracy_list.append(true_next_token_id == ranked_token_ids[0])
                 top_k_accuracy_list.append(true_next_token_id in ranked_token_ids[:K])
                 true_token_rank = ranked_token_ids.index(true_next_token_id) + 1
