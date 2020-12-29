@@ -47,7 +47,11 @@ if __name__ == '__main__':
                 continue  # skip empty lines.
 
             input_ids = tokenizer.encode(text=line, return_tensors="pt")
-            model_output = model(input_ids)
+            try:
+                model_output = model(input_ids)
+            except Exception as exc:
+                print(f'Following exception raised during model prediction: {exc}')
+                continue
             for position in range(input_ids.shape[1] - 1):
                 # Predict and rank tokens
                 next_token_logits = model_output.logits[:, position, :]
