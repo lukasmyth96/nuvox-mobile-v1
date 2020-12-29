@@ -123,6 +123,10 @@
         // Reset lastX and lastY to -1 to indicate that they are now invalid, since we have lifted the "pen"
         lastX=-1;
         lastY=-1;
+
+        // clear the canvas
+        clearCanvas(canvas,ctx);
+
     }
 
     // Draw something and prevent the default scrolling when touch movement is detected
