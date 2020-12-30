@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_user_agents',
+    'rest_framework',
     'users.apps.UsersConfig',
     'keyboard.apps.KeyboardConfig',
 ]
