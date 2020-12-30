@@ -1,3 +1,8 @@
+#text-container{
+    border:2px solid #888;
+    border-radius:4px;
+}
+
 #sketchpadapp {
     /* Prevent nearby text being highlighted when accidentally dragging mouse outside confines of the canvas */
     -webkit-touch-callout: none;

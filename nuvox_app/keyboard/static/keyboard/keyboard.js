@@ -195,7 +195,7 @@ function getTouchPos(e) {
 
 function sketchpad_resize() {
     canvas.width = window.innerWidth * 0.5;
-    canvas.height = window.innerHeight;
+    canvas.height = window.innerHeight * 0.8;
 }
 
 
