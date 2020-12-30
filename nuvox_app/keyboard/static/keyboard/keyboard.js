@@ -1,6 +1,8 @@
-// Variables for referencing the canvas and 2dcanvas context
+// Variables for referencing the canvas and 2d canvas context
 let canvas, ctx;
 
+// Record swipe trace, a sequence of objects containing the x and y coordinates at each time-step.
+// Note - coordinates are relative to the canvas.
 let trace = [];
 
 // Variables to keep track of the mouse position and left-button status
@@ -36,7 +38,6 @@ function drawLine(ctx, x, y, size) {
     ctx.lineCap = "round";
     //ctx.lineJoin = "round";
 
-
     // Draw a filled line
     ctx.beginPath();
 
@@ -62,44 +63,54 @@ function clearCanvas(canvas, ctx) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
 
-function updateTrace() {
+function clearTrace() {
+    trace = [];
+}
+
+// Update trace with latest mouse position.
+function updateMouseTrace() {
     const relX = mouseX / canvas.width;
     const relY = mouseY / canvas.height;
     trace.push({x: relX, y: relY});
 }
 
+// Update trace with latest touch position.
+function updateTouchTrace() {
+    const relX = touchX / canvas.width;
+    const relY = touchY / canvas.height;
+    trace.push({x: relX, y: relY});
+}
+
 // Keep track of the mouse button being pressed and draw a dot at current location
-function sketchpad_mouseDown() {
+function onMouseDown() {
     mouseDown = 1;
     drawLine(ctx, mouseX, mouseY, 8);
 }
 
-// Keep track of the mouse button being released
-function sketchpad_mouseUp() {
-    mouseDown = 0;
-
-    // clear the canvas
-    clearCanvas(canvas, ctx);
-
-    console.log(trace);
-    trace = [];
-
-    // Reset lastX and lastY to -1 to indicate that they are now invalid, since we have lifted the "pen"
-    lastX = -1;
-    lastY = -1;
-}
-
 // Keep track of the mouse position and draw a dot if mouse button is currently pressed
-function sketchpad_mouseMove(e) {
+function onMouseMove(e) {
 
     // Update the mouse co-ordinates when moved
     getMousePos(e);
 
     if (mouseDown === 1) {
-        updateTrace();
+        updateMouseTrace();
 
         drawLine(ctx, mouseX, mouseY, 8);
     }
+}
+
+// Keep track of the mouse button being released
+function onMouseUp() {
+    mouseDown = 0;
+
+    clearCanvas(canvas, ctx);
+
+    clearTrace();
+
+    // Reset lastX and lastY to -1 to indicate that they are now invalid, since we have lifted the "pen"
+    lastX = -1;
+    lastY = -1;
 }
 
 // Get the current mouse position relative to the top-left of the canvas
@@ -115,7 +126,7 @@ function getMousePos(e) {
 }
 
 // Draw something when a touch start is detected
-function sketchpad_touchStart() {
+function onTouchStart() {
     // Update the touch co-ordinates
     getTouchPos();
 
@@ -125,23 +136,24 @@ function sketchpad_touchStart() {
     e.preventDefault();
 }
 
-function sketchpad_touchEnd() {
+function onTouchEnd() {
     // Reset lastX and lastY to -1 to indicate that they are now invalid, since we have lifted the "pen"
     lastX = -1;
     lastY = -1;
 
-    // clear the canvas
     clearCanvas(canvas, ctx);
+
+    clearTrace();
 
 }
 
 // Draw something and prevent the default scrolling when touch movement is detected
-function sketchpad_touchMove(e) {
+function onTouchMove(e) {
     // Update the touch co-ordinates
     getTouchPos(e);
 
     // Add latest position to trace
-    updateTrace();
+    updateTouchTrace();
 
     // During a touchmove event, unlike a mousemove event, we don't need to check if the touch is engaged, since there will always be contact with the screen by definition.
     drawLine(ctx, touchX, touchY, 8);
@@ -150,9 +162,9 @@ function sketchpad_touchMove(e) {
     e.preventDefault();
 }
 
-// Get the touch position relative to the top-left of the canvas
-// When we get the raw values of pageX and pageY below, they take into account the scrolling on the page
-// but not the position relative to our target div. We'll adjust them using "target.offsetLeft" and
+// Get the touch position relative to the top-left of the canvas.
+// When we get the raw values of pageX and pageY below, they take into account the scrolling on the page.
+// but not the position relative to our target div. We'll adjust them using "target.offsetLeft" and.
 // "target.offsetTop" to get the correct values in relation to the top left of the canvas.
 function getTouchPos(e) {
 
@@ -179,13 +191,13 @@ function onBodyLoad() {
     // Check that we have a valid context to draw on/with before adding event handlers
     if (ctx) {
         // React to mouse events on the canvas, and mouseup on the entire document
-        canvas.addEventListener('mousedown', sketchpad_mouseDown, false);
-        canvas.addEventListener('mousemove', sketchpad_mouseMove, false);
-        window.addEventListener('mouseup', sketchpad_mouseUp, false);
+        canvas.addEventListener('mousedown', onMouseDown, false);
+        canvas.addEventListener('mousemove', onMouseMove, false);
+        window.addEventListener('mouseup', onMouseUp, false);
 
         // React to touch events on the canvas
-        canvas.addEventListener('touchstart', sketchpad_touchStart, false);
-        canvas.addEventListener('touchend', sketchpad_touchEnd, false);
-        canvas.addEventListener('touchmove', sketchpad_touchMove, false);
+        canvas.addEventListener('touchstart', onTouchStart, false);
+        canvas.addEventListener('touchend', onTouchEnd, false);
+        canvas.addEventListener('touchmove', onTouchMove, false);
     }
 }
