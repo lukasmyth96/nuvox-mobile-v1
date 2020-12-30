@@ -1,33 +1,33 @@
 // Variables for referencing the canvas and 2dcanvas context
-var canvas, ctx;
+let canvas, ctx;
 
 let trace = [];
 
 // Variables to keep track of the mouse position and left-button status
-var mouseX, mouseY, mouseDown = 0;
+let mouseX, mouseY, mouseDown = 0;
 
 // Variables to keep track of the touch position
-var touchX, touchY;
+let touchX, touchY;
 
 // Keep track of the old/last position when drawing a line
 // We set it to -1 at the start to indicate that we don't have a good value for it yet
-var lastX, lastY = -1;
+let lastX, lastY = -1;
 
 // Draws a line between the specified position on the supplied canvas name
 // Parameters are: A canvas context, the x position, the y position, the size of the dot
 function drawLine(ctx, x, y, size) {
 
     // If lastX is not set, set lastX and lastY to the current position
-    if (lastX == -1) {
+    if (lastX === -1) {
         lastX = x;
         lastY = y;
     }
 
     // Let's use black by setting RGB values to 0, and 255 alpha (completely opaque)
-    r = 0;
-    g = 0;
-    b = 0;
-    a = 255;
+    const r = 0;
+    const g = 0;
+    const b = 0;
+    const a = 255;
 
     // Select a fill style
     ctx.strokeStyle = "rgba(" + r + "," + g + "," + b + "," + (a / 255) + ")";
@@ -104,8 +104,6 @@ function sketchpad_mouseMove(e) {
 
 // Get the current mouse position relative to the top-left of the canvas
 function getMousePos(e) {
-    if (!e)
-        var e = event;
 
     if (e.offsetX) {
         mouseX = e.offsetX;
@@ -124,7 +122,7 @@ function sketchpad_touchStart() {
     drawLine(ctx, touchX, touchY, 8);
 
     // Prevents an additional mousedown event being triggered
-    event.preventDefault();
+    e.preventDefault();
 }
 
 function sketchpad_touchEnd() {
@@ -149,7 +147,7 @@ function sketchpad_touchMove(e) {
     drawLine(ctx, touchX, touchY, 8);
 
     // Prevent a scrolling action as a result of this touchmove triggering.
-    event.preventDefault();
+    e.preventDefault();
 }
 
 // Get the touch position relative to the top-left of the canvas
@@ -157,12 +155,10 @@ function sketchpad_touchMove(e) {
 // but not the position relative to our target div. We'll adjust them using "target.offsetLeft" and
 // "target.offsetTop" to get the correct values in relation to the top left of the canvas.
 function getTouchPos(e) {
-    if (!e)
-        var e = event;
 
     if (e.touches) {
-        if (e.touches.length == 1) { // Only deal with one finger
-            var touch = e.touches[0]; // Get the information for finger #1
+        if (e.touches.length === 1) { // Only deal with one finger
+            const touch = e.touches[0]; // Get the information for finger #1
             touchX = touch.pageX - touch.target.offsetLeft;
             touchY = touch.pageY - touch.target.offsetTop;
         }
