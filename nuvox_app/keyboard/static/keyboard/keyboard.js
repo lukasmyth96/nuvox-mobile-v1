@@ -65,7 +65,6 @@ function clearCanvas(canvas, ctx) {
 }
 
 function clearTrace() {
-    console.log(trace);
     trace = [];
 }
 
@@ -122,6 +121,8 @@ function onMouseUp() {
 
     clearTrace();
 
+    setNewTargetWord();
+
     // Reset lastX and lastY to -1 to indicate that they are now invalid, since we have lifted the "pen"
     lastX = -1;
     lastY = -1;
@@ -160,6 +161,8 @@ function onTouchEnd() {
     clearCanvas(canvas, ctx);
 
     clearTrace();
+
+    setNewTargetWord();
 
 }
 
@@ -236,5 +239,6 @@ function onBodyLoad() {
         canvas.addEventListener('touchmove', onTouchMove, false);
     }
 
-    getRandomWord();
+    // Set the initial target word
+    setNewTargetWord();
 }

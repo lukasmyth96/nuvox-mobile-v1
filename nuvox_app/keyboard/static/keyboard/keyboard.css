@@ -1,9 +1,9 @@
-#text-container{
+#target-word-container{
     text-align: center;
     height: 20vh;
 }
 
-#text{
+#target-word{
     font-size: 32pt;
     font-weight: bolder;
     padding-top: 10vh;
