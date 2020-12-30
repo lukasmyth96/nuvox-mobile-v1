@@ -90,7 +90,7 @@ function getSecondsSinceTraceStart() {
     return (currentTime - traceStartTime) / 1000;
 }
 
-function resetTraceStartTime(){
+function resetTraceStartTime() {
     traceStartTime = new Date().getTime();
 }
 
@@ -193,6 +193,11 @@ function getTouchPos(e) {
     }
 }
 
+function sketchpad_resize() {
+    canvas.width = window.innerWidth * 0.5;
+    canvas.height = window.innerHeight;
+}
+
 
 // Set-up the canvas and add our event handlers after the page has loaded
 // Note onBodyLoad is called via the 'onload' attribute of <body> in base.html.
@@ -206,6 +211,13 @@ function onBodyLoad() {
 
     // Check that we have a valid context to draw on/with before adding event handlers
     if (ctx) {
+
+        // First, adjust the canvas size to fit the current screen dimensions
+        sketchpad_resize();
+
+        // React to window being resized
+        window.addEventListener('resize', sketchpad_resize, false);
+
         // React to mouse events on the canvas, and mouseup on the entire document
         canvas.addEventListener('mousedown', onMouseDown, false);
         canvas.addEventListener('mousemove', onMouseMove, false);

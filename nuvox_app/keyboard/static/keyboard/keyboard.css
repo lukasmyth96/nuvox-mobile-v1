@@ -10,8 +10,6 @@
 
 #sketchpad {
     /* Note background-url is specified inline in keyboard.html as it references Django static so can't be here (I think). */
-    height:600px;
-    width:600px;
     margin-left: auto;
     margin-right: auto;
     display: block;
