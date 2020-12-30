@@ -13,6 +13,27 @@
 {% endblock head %}
 
 {% block content %}
+
+    <script>
+        function submitSwipe() {
+            $.ajax({
+                    url: '/data-collection-swipes/',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        "target_text": targetText,
+                        "trace": trace,
+                    }),
+                    beforeSend: function(xhr){xhr.setRequestHeader('X-CSRFToken', '{{ csrf_token }}');},
+                    dataType: 'json',
+                    success: function () {
+                        alert('Thanks for submitting a swipe!')
+                    }
+                }
+            );
+        }
+    </script>
+
     <div id="target-word-container">
         <!--Note text is set dynamically by js.-->
         <h1 id="target-word"></h1>

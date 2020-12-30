@@ -1,6 +1,8 @@
 // Variables for referencing the canvas and 2d canvas context
 let canvas, ctx;
 
+let targetText;
+
 // Record swipe trace, a sequence of objects containing the x and y coordinates at each time-step.
 // Note - coordinates are relative to the canvas.
 let trace = [];
@@ -117,6 +119,8 @@ function onMouseMove(e) {
 function onMouseUp() {
     mouseDown = 0;
 
+    submitSwipe();
+
     clearCanvas(canvas, ctx);
 
     clearTrace();
@@ -157,6 +161,8 @@ function onTouchEnd() {
     // Reset lastX and lastY to -1 to indicate that they are now invalid, since we have lifted the "pen"
     lastX = -1;
     lastY = -1;
+
+    submitSwipe();
 
     clearCanvas(canvas, ctx);
 
