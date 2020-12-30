@@ -194,14 +194,21 @@ function getTouchPos(e) {
 }
 
 function sketchpad_resize() {
-    canvas.width = window.innerWidth * 0.5;
-    canvas.height = window.innerHeight * 0.8;
+    // isMobile is defined in keyboard.html from Django context.
+    if (isMobile) {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight * 0.8;
+    } else {
+        canvas.width = window.innerWidth * 0.4;
+        canvas.height = window.innerHeight * 0.8;
+    }
 }
 
 
 // Set-up the canvas and add our event handlers after the page has loaded
 // Note onBodyLoad is called via the 'onload' attribute of <body> in base.html.
 function onBodyLoad() {
+
     // Get the specific canvas element from the HTML document
     canvas = document.getElementById('sketchpad');
 

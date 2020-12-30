@@ -1,6 +1,12 @@
 #text-container{
-    border:2px solid #888;
-    border-radius:4px;
+    text-align: center;
+    height: 20vh;
+}
+
+#text{
+    font-size: 32pt;
+    font-weight: bolder;
+    padding-top: 10vh;
 }
 
 #sketchpadapp {
