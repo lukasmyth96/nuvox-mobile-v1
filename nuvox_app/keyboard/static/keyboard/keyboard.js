@@ -235,4 +235,6 @@ function onBodyLoad() {
         canvas.addEventListener('touchend', onTouchEnd, false);
         canvas.addEventListener('touchmove', onTouchMove, false);
     }
+
+    getRandomWord();
 }
