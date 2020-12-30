@@ -4,6 +4,7 @@ let canvas, ctx;
 // Record swipe trace, a sequence of objects containing the x and y coordinates at each time-step.
 // Note - coordinates are relative to the canvas.
 let trace = [];
+let traceStartTime;
 
 // Variables to keep track of the mouse position and left-button status
 let mouseX, mouseY, mouseDown = 0;
@@ -64,26 +65,39 @@ function clearCanvas(canvas, ctx) {
 }
 
 function clearTrace() {
+    console.log(trace);
     trace = [];
 }
 
-// Update trace with latest mouse position.
+// Update trace with latest mouse position relative to canvas.
 function updateMouseTrace() {
-    const relX = mouseX / canvas.width;
-    const relY = mouseY / canvas.height;
-    trace.push({x: relX, y: relY});
+    const x = mouseX / canvas.width;
+    const y = mouseY / canvas.height;
+    const t = getSecondsSinceTraceStart();
+    trace.push({x, y, t});
 }
 
-// Update trace with latest touch position.
+// Update trace with latest touch position relative to canvas.
 function updateTouchTrace() {
-    const relX = touchX / canvas.width;
-    const relY = touchY / canvas.height;
-    trace.push({x: relX, y: relY});
+    const x = touchX / canvas.width;
+    const y = touchY / canvas.height;
+    const t = getSecondsSinceTraceStart();
+    trace.push({x, y, t});
+}
+
+function getSecondsSinceTraceStart() {
+    const currentTime = new Date().getTime();
+    return (currentTime - traceStartTime) / 1000;
+}
+
+function resetTraceStartTime(){
+    traceStartTime = new Date().getTime();
 }
 
 // Keep track of the mouse button being pressed and draw a dot at current location
 function onMouseDown() {
     mouseDown = 1;
+    resetTraceStartTime();
     drawLine(ctx, mouseX, mouseY, 8);
 }
 
@@ -127,6 +141,8 @@ function getMousePos(e) {
 
 // Draw something when a touch start is detected
 function onTouchStart() {
+    resetTraceStartTime();
+
     // Update the touch co-ordinates
     getTouchPos();
 
