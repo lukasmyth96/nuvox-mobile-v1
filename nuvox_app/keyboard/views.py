@@ -1,9 +1,8 @@
 import random
-
-from english_words import english_words_set
 from django.shortcuts import render
 from django.views.decorators.http import require_http_methods
 from django.http import JsonResponse
+from wordfreq import top_n_list
 
 
 def keyboard(request):
@@ -13,6 +12,6 @@ def keyboard(request):
 
 @require_http_methods(['GET'])
 def random_word(request):
-    english_words_list = list(english_words_set)
-    word = random.choice(english_words_list)
+    word_list = top_n_list('en', 1000)
+    word = random.choice(word_list)
     return JsonResponse({'word': word})
