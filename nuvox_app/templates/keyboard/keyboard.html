@@ -8,6 +8,8 @@
     // Variables for referencing the canvas and 2dcanvas context
     var canvas,ctx;
 
+    let trace = [];
+
     // Variables to keep track of the mouse position and left-button status
     var mouseX,mouseY,mouseDown=0;
 
@@ -64,6 +66,12 @@
         ctx.clearRect(0, 0, canvas.width, canvas.height);
     }
 
+    function updateTrace() {
+        const relX = mouseX / canvas.width;
+        const relY = mouseY / canvas.height;
+        trace.push({x: relX, y: relY});
+    }
+
     // Keep track of the mouse button being pressed and draw a dot at current location
     function sketchpad_mouseDown() {
         mouseDown=1;
@@ -77,6 +85,9 @@
         // clear the canvas
         clearCanvas(canvas,ctx);
 
+        console.log(trace);
+        trace = [];
+
         // Reset lastX and lastY to -1 to indicate that they are now invalid, since we have lifted the "pen"
         lastX=-1;
         lastY=-1;
@@ -84,11 +95,13 @@
 
     // Keep track of the mouse position and draw a dot if mouse button is currently pressed
     function sketchpad_mouseMove(e) {
+
         // Update the mouse co-ordinates when moved
         getMousePos(e);
 
-        // Draw a dot if the mouse button is currently being pressed
-        if (mouseDown==1) {
+        if (mouseDown === 1) {
+            updateTrace();
+
             drawLine(ctx,mouseX,mouseY,8);
         }
     }
@@ -133,6 +146,9 @@
     function sketchpad_touchMove(e) {
         // Update the touch co-ordinates
         getTouchPos(e);
+
+        // Add latest position to trace
+        updateTrace();
 
         // During a touchmove event, unlike a mousemove event, we don't need to check if the touch is engaged, since there will always be contact with the screen by definition.
         drawLine(ctx,touchX,touchY,8);
