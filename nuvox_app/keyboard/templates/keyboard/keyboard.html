@@ -2,6 +2,10 @@
 {% load static %}
 {% load crispy_forms_filters %}
 
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'keyboard/keyboard.css' %}">
+{% endblock head %}
+
 {% block content %}
 
 <script type="text/javascript">
@@ -199,36 +203,10 @@
     }
 </script>
 
-<style>
-/* Some CSS styling */
-#sketchpadapp {
-    /* Prevent nearby text being highlighted when accidentally dragging mouse outside confines of the canvas */
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-}
-
-#sketchpad {
-    height:600px;
-    width:600px;
-    margin-left: auto;
-    margin-right: auto;
-    display: block;
-    border:2px solid #888;
-    border-radius:4px;
-    position:relative; /* Necessary for correct mouse co-ords in Firefox */
-    background-image:url({% static "keyboard/assets/nuvox_keyboard_img.png" %});
-    background-size: 100% 100%;
-}
-
-</style>
 
     <div id="sketchpadapp">
-        <!--Note repeating width and height here seems to be necessary for some reason-->
-        <canvas id="sketchpad" height="600" width="600">
+        <!--Note specifying width and height here as well as in CSS seems to be necessary for some reason-->
+        <canvas id="sketchpad" height="600" width="600" style="background-image: url({% static "keyboard/assets/nuvox_keyboard_img.png" %})">
         </canvas>
     </div>
     <script type="text/javascript">
