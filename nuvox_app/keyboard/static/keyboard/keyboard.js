@@ -167,7 +167,8 @@ function getTouchPos(e) {
 
 
 // Set-up the canvas and add our event handlers after the page has loaded
-function init() {
+// Note onBodyLoad is called via the 'onload' attribute of <body> in base.html.
+function onBodyLoad() {
     // Get the specific canvas element from the HTML document
     canvas = document.getElementById('sketchpad');
 
