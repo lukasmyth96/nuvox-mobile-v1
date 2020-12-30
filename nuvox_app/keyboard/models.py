@@ -25,5 +25,5 @@ class BaseSwipe(models.Model):
 
 
 class DataCollectionSwipe(BaseSwipe):
-    target_text: models.CharField(max_length=255)
+    target_text = models.CharField(max_length=255)
     is_trace_valid = models.BooleanField(null=True, blank=True)
