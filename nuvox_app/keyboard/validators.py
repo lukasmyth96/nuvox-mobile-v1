@@ -27,3 +27,8 @@ def validate_trace_point(trace_point: Dict[str, float]):
 
     if not all([isinstance(val, float) for val in trace_point.values()]):
         raise ValidationError(f'Each trace point value must a float')
+
+
+def validate_trace_matches_target_text(trace: List[Dict[str, float]],
+                                       target_text: str):
+    pass

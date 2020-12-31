@@ -1,6 +1,7 @@
 import itertools
 from typing import List, Dict, Optional
 
+from nuvox_algorithm.utils.list_funcs import filter_adjacent_duplicates
 from .key import Key
 
 
@@ -34,9 +35,7 @@ class Keyboard:
         """
         key_id_sequence = []
         for char in list(text):
-
             char = char.lower()
-
             try:
                 key_id = self.char_to_key_id[char]
             except KeyError:
@@ -46,9 +45,34 @@ class Keyboard:
                     raise KeyError(f'Found no key containing char: {char}. '
                                    f'Pass skip_invalid_chars=True to skip invalid chars.')
 
-            if (not key_id_sequence) or (key_id_sequence and key_id != key_id_sequence[-1]):
-                key_id_sequence.append(key_id)
+            key_id_sequence.append(key_id)
 
+        key_id_sequence = filter_adjacent_duplicates(key_id_sequence)
+        key_id_sequence = ''.join(key_id_sequence)
+
+        return key_id_sequence
+
+    def trace_to_kis(self, trace: List[Dict[str, float]]) -> str:
+        """Returns key-id-sequence for a given trace.
+
+        Examples
+        --------
+        [{'x': 0.15, 'y': 0.23, 't': 0.12}, ...] --> '3246'
+
+        Raises
+        --------
+        ValueError
+            If a no key exists for a point in the trace.
+        """
+        key_id_sequence = []
+        for trace_point in trace:
+            x, y = trace_point['x'], trace_point['y']
+            key = self.key_at_point(x, y)
+            if key is None:
+                raise ValueError(f'No key at point ({x},{y})')
+            key_id_sequence.append(key.id)
+
+        key_id_sequence = filter_adjacent_duplicates(key_id_sequence)
         key_id_sequence = ''.join(key_id_sequence)
 
         return key_id_sequence
