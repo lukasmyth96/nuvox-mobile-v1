@@ -11,7 +11,7 @@ from games.models import Game
 
 def validate_game_has_not_expired(game: Game):
     if game.has_expired:
-        raise ValidationError('This game has expired!')
+        raise ValidationError('game has expired')
 
 
 def validate_trace(trace: List[Dict[str, float]]):

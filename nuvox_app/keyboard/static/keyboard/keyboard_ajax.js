@@ -62,9 +62,8 @@ function submitSwipe() {
         } else {
             alert('Trace was not accurate :(')
         }
-    })
-        .fail(function (jqXHR, exception) {
-                alert('Oops something went wrong :(');
-            }
-        )
+    }).fail(function (jqXHR, exception) {
+            alert('Oops something went wrong :(');
+        }
+    )
 }

@@ -13,4 +13,4 @@ class Game(models.Model):
     @property
     def has_expired(self) -> bool:
         """Returns True if game was created over 60s ago."""
-        return (datetime.now(tz=self.created_on.tzinfo) - self.created_on).total_seconds() > 60
+        return (datetime.now(tz=self.created_on.tzinfo) - self.created_on).total_seconds() > 10
