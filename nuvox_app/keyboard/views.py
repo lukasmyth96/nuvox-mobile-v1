@@ -21,7 +21,7 @@ def keyboard(request):
 
 @require_http_methods(['GET'])
 def random_word(request):
-    word_list = top_n_list('en', 1000)
+    word_list = [word for word in top_n_list('en', 2500) if word.isalpha()]
     word = random.choice(word_list)
     return JsonResponse({'word': word})
 
