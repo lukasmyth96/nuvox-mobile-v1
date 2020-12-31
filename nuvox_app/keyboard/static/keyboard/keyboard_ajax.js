@@ -36,6 +36,11 @@ function setNewTargetWord() {
 }
 
 function submitSwipe() {
+    if (typeof gameId === 'undefined') {
+        alert('You must start a game first!');
+        return;
+    }
+
     $.ajax({
             url: '/api/data-collection-swipes/',
             type: 'POST',
