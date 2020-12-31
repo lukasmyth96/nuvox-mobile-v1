@@ -8,7 +8,7 @@ function startNewGame() {
             dataType: 'json',
         }
     ).done(function (data) {
-        gameId = data.game;
+        gameId = data.id;
 
         // Set the initial target word.
         setNewTargetWord();
