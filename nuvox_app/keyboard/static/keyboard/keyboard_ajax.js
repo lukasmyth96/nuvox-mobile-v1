@@ -1,3 +1,27 @@
+function startNewGame() {
+    $.ajax({
+            url: '/api/games/',
+            type: 'POST',
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('X-CSRFToken', csrfToken);
+            },
+            dataType: 'json',
+        }
+    ).done(function (data) {
+        gameId = data.game;
+
+        // Set the initial target word.
+        setNewTargetWord();
+
+        // hide the start game button.
+        $('#start-game-button').hide();
+
+        // show the target word element.
+        $('#target-word').show();
+    })
+}
+
+
 function setNewTargetWord() {
     $.ajax({
             url: '/api/random-word/',
@@ -17,6 +41,7 @@ function submitSwipe() {
             type: 'POST',
             contentType: 'application/json',
             data: JSON.stringify({
+                "game": gameId,
                 "target_text": targetText,
                 "trace": trace,
             }),

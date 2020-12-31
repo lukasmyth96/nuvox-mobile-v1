@@ -1,6 +1,10 @@
-#target-word-container{
+#keyboard-top-section{
     text-align: center;
     height: 20vh;
+}
+
+#start-game-button{
+    padding-top: 10vh;
 }
 
 #target-word{

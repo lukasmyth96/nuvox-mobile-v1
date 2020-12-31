@@ -3,6 +3,8 @@ let canvas, ctx;
 
 let targetText;
 
+let gameId;
+
 // Record swipe trace, a sequence of objects containing the x and y coordinates at each time-step.
 // Note - coordinates are relative to the canvas.
 let trace = [];
@@ -244,7 +246,4 @@ function onBodyLoad() {
         canvas.addEventListener('touchend', onTouchEnd, false);
         canvas.addEventListener('touchmove', onTouchMove, false);
     }
-
-    // Set the initial target word
-    setNewTargetWord();
 }
