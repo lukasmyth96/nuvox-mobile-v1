@@ -10,7 +10,7 @@ from games.models import Game
 
 
 def validate_game_has_not_timed_out(game: Game):
-    if (datetime.now(tz=game.created_on.tzinfo) - game.created_on).total_seconds() > 60:
+    if game.has_expired:
         raise ValidationError('This game has expired!')
 
 
