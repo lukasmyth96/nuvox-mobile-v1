@@ -49,4 +49,3 @@ def validate_trace_matches_target_text(trace: List[Dict[str, float]],
 
     if errors:
         raise ValidationError({'trace': ', '.join(errors)})
-

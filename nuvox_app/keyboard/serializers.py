@@ -8,9 +8,5 @@ class DataCollectionSwipeSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = DataCollectionSwipe
-        fields = ('target_text', 'trace', 'is_trace_valid')
-        read_only_fields = ('is_trace_valid',)
-
-    def validate(self, data):
-        validate_trace_matches_target_text(trace=data['trace'], target_text=data['target_text'])
-        return data
+        fields = ('target_text', 'trace', 'trace_matches_text')
+        read_only_fields = ('trace_matches_text',)
