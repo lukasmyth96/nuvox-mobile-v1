@@ -19,11 +19,16 @@ function submitSwipe() {
                 "target_text": targetText,
                 "trace": trace,
             }),
-            beforeSend: function(xhr){xhr.setRequestHeader('X-CSRFToken', csrfToken);},
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('X-CSRFToken', csrfToken);
+            },
             dataType: 'json',
-            success: function () {
-                alert('Thanks for submitting a swipe!')
-            }
         }
-    );
+    ).done(function (response) {
+        alert('Thanks :)')
+    })
+        .fail(function (jqXHR, exception) {
+                alert('Invalid Swipe :(');
+            }
+        )
 }
