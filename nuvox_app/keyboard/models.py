@@ -2,6 +2,7 @@ from django.db import models
 
 from users.models import User
 from keyboard.validators import validate_trace
+from games.models import Game
 
 
 class DeviceType(models.TextChoices):
@@ -12,7 +13,7 @@ class DeviceType(models.TextChoices):
 
 
 class BaseSwipe(models.Model):
-    user = models.ForeignKey(to=User, on_delete=models.CASCADE)
+    user = models.ForeignKey(to=User, on_delete=models.CASCADE, related_name='swipes')
     device_type = models.CharField(choices=DeviceType.choices, max_length=16)
     trace = models.JSONField(validators=[validate_trace])
     created_on = models.DateTimeField(auto_now_add=True)
@@ -33,6 +34,7 @@ class BaseSwipe(models.Model):
 
 
 class DataCollectionSwipe(BaseSwipe):
+    game = models.ForeignKey(to=Game, on_delete=models.CASCADE, related_name='games')
     target_text = models.CharField(max_length=255)
     trace_matches_text = models.BooleanField()  # is trace sufficiently accurate.
 
