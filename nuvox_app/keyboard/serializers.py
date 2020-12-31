@@ -7,5 +7,5 @@ class DataCollectionSwipeSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = DataCollectionSwipe
-        fields = ('target_text', 'trace', 'trace_matches_text')
+        fields = ('game', 'target_text', 'trace', 'trace_matches_text')
         read_only_fields = ('trace_matches_text',)
