@@ -33,7 +33,7 @@ class CollectedSessionViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         trace_matches_text = trace_matches_target_text(
-            trace=serializer.data['trace'],
-            target_text=serializer.data['target_text']
+            trace=serializer.validated_data['trace'],
+            target_text=serializer.validated_data['target_text']
         )
         serializer.save(user=self.request.user, trace_matches_text=trace_matches_text)

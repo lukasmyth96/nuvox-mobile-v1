@@ -26,10 +26,14 @@ function submitSwipe() {
             dataType: 'json',
         }
     ).done(function (data) {
-        alert('Thanks :)')
+        if (data.trace_matches_text === true) {
+            alert('Thanks :)')
+        } else {
+            alert('Trace was not accurate :(')
+        }
     })
         .fail(function (jqXHR, exception) {
-                alert('Invalid Swipe :(');
+                alert('Oops something went wrong :(');
             }
         )
 }
