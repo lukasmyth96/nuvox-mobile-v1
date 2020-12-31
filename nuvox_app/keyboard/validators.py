@@ -9,7 +9,7 @@ from nuvox_algorithm.core import Keyboard, nuvox_key_list
 from games.models import Game
 
 
-def validate_game_has_not_timed_out(game: Game):
+def validate_game_has_not_expired(game: Game):
     if game.has_expired:
         raise ValidationError('This game has expired!')
 
