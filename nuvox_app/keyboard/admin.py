@@ -5,4 +5,4 @@ from keyboard.models import DataCollectionSwipe
 
 @admin.register(DataCollectionSwipe)
 class DataCollectionSwipeAdmin(admin.ModelAdmin):
-    list_display = ('user', 'id', 'target_text', 'is_trace_valid', 'created_on')
+    list_display = ('user', 'id', 'target_text', 'trace_matches_text', 'created_on')
