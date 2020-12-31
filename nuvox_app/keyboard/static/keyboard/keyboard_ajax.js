@@ -1,11 +1,12 @@
 function setNewTargetWord() {
     $.ajax({
             url: '/random-word/',
-            dataType: 'json',
-            success: function (data) {
-                targetText = data.word;
-                $('#target-word').text(`Please swype the word: ${data.word}`);
-            }
+            dataType: 'json'
+        }
+    ).done(
+        function (data) {
+            targetText = data.word;
+            $('#target-word').text(`Please swype the word: ${data.word}`);
         }
     );
 }
@@ -24,7 +25,7 @@ function submitSwipe() {
             },
             dataType: 'json',
         }
-    ).done(function (response) {
+    ).done(function (data) {
         alert('Thanks :)')
     })
         .fail(function (jqXHR, exception) {
