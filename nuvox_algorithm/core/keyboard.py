@@ -2,18 +2,6 @@ from typing import List, Dict, Optional
 
 from .key import Key
 
-nuvox_key_list = [
-    Key(id='1', chars=['a', 'b', 'c']),
-    Key(id='2', chars=['d', 'e', 'f']),
-    Key(id='3', chars=['g', 'h', 'i']),
-    Key(id='4', chars=['j', 'k', 'l']),
-    Key(id='5', chars=[]),
-    Key(id='6', chars=['m', 'n', 'o']),
-    Key(id='7', chars=['p', 'q', 'r', 's']),
-    Key(id='8', chars=['t', 'u', 'v']),
-    Key(id='9', chars=['w', 'x', 'y']),
-]
-
 
 class Keyboard:
 
