@@ -34,6 +34,17 @@ class CollectedSessionViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         """Add additional fields to serializer before saving."""
+        trace_matches_text = trace_matches_target_text(
+            trace=serializer.validated_data['trace'],
+            target_text=serializer.validated_data['target_text']
+        )
+        serializer.save(
+            user=self.request.user,
+            trace_matches_text=trace_matches_text,
+            device_type=self._get_device_type()
+        )
+
+    def _get_device_type(self) -> DeviceType:
         user_agent = get_user_agent(self.request)
         if user_agent.is_mobile:
             device_type = DeviceType.MOBILE
@@ -43,12 +54,4 @@ class CollectedSessionViewSet(viewsets.ModelViewSet):
             device_type = DeviceType.PC
         else:
             device_type = DeviceType.OTHER
-        trace_matches_text = trace_matches_target_text(
-            trace=serializer.validated_data['trace'],
-            target_text=serializer.validated_data['target_text']
-        )
-        serializer.save(
-            user=self.request.user,
-            trace_matches_text=trace_matches_text,
-            device_type=device_type
-        )
+        return device_type
