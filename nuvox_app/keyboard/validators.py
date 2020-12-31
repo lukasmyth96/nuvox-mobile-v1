@@ -37,11 +37,16 @@ def validate_trace_matches_target_text(trace: List[Dict[str, float]],
     keyboard = Keyboard(keys=nuvox_key_list)
     trace_kis = keyboard.trace_to_kis(trace)
     target_text_kis = keyboard.text_to_kis(target_text, skip_invalid_chars=True)
+    errors = []
     if trace_kis[0] != target_text_kis[0]:
-        raise ValidationError(f'Expected trace to start at key {target_text_kis[0]} but it started at key {trace_kis[0]}')
+        errors.append(f'Expected trace to start at key {target_text_kis[0]} but it started at key {trace_kis[0]}')
 
     if trace_kis[-1] != target_text_kis[-1]:
-        raise ValidationError(f'Expected trace to end at key {target_text_kis[-1]} but it started at key {trace_kis[-1]}')
+        errors.append(f'Expected trace to end at key {target_text_kis[-1]} but it started at key {trace_kis[-1]}')
 
     if target_text_kis not in all_char_subsequences(trace_kis):
-        raise ValidationError(f'Trace KIS {trace_kis} not contained in expected KIS {target_text_kis}')
+        errors.append(f'Trace KIS {trace_kis} not contained in expected KIS {target_text_kis}')
+
+    if errors:
+        raise ValidationError({'trace': ', '.join(errors)})
+
