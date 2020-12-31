@@ -1,7 +1,7 @@
 from django.db import models
 
 from users.models import User
-from keyboard.validators import validate_trace
+from keyboard.validators import validate_trace, validate_game_has_not_timed_out
 from games.models import Game
 
 
@@ -34,7 +34,7 @@ class BaseSwipe(models.Model):
 
 
 class DataCollectionSwipe(BaseSwipe):
-    game = models.ForeignKey(to=Game, on_delete=models.CASCADE, related_name='games')
+    game = models.ForeignKey(to=Game, on_delete=models.CASCADE, related_name='games', validators=[validate_game_has_not_timed_out])
     target_text = models.CharField(max_length=255)
     trace_matches_text = models.BooleanField()  # is trace sufficiently accurate.
 

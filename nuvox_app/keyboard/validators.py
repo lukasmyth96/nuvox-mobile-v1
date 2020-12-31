@@ -1,9 +1,17 @@
+from datetime import datetime
 from typing import List, Dict
 
 from django.core.exceptions import ValidationError
 
 from nuvox_algorithm.utils.string_funcs import all_char_subsequences
 from nuvox_algorithm.core import Keyboard, nuvox_key_list
+
+from games.models import Game
+
+
+def validate_game_has_not_timed_out(game: Game):
+    if (datetime.now(tz=game.created_on.tzinfo) - game.created_on).total_seconds() > 60:
+        raise ValidationError('This game has expired!')
 
 
 def validate_trace(trace: List[Dict[str, float]]):
