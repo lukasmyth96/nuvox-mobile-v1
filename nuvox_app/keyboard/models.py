@@ -4,8 +4,16 @@ from users.models import User
 from keyboard.validators import validate_trace
 
 
+class DeviceType(models.TextChoices):
+    MOBILE = ('mobile', 'mobile')
+    TABLET = ('tablet', 'tablet')
+    PC = ('pc', 'pc')
+    OTHER = ('other', 'other')
+
+
 class BaseSwipe(models.Model):
     user = models.ForeignKey(to=User, on_delete=models.CASCADE)
+    device_type = models.CharField(choices=DeviceType.choices, max_length=16)
     trace = models.JSONField(validators=[validate_trace])
     created_on = models.DateTimeField(auto_now_add=True)
     modified_on = models.DateTimeField(auto_now=True)
