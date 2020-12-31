@@ -1,6 +1,6 @@
 function setNewTargetWord() {
     $.ajax({
-            url: '/random-word/',
+            url: '/api/random-word/',
             dataType: 'json'
         }
     ).done(
@@ -13,7 +13,7 @@ function setNewTargetWord() {
 
 function submitSwipe() {
     $.ajax({
-            url: '/data-collection-swipes/',
+            url: '/api/data-collection-swipes/',
             type: 'POST',
             contentType: 'application/json',
             data: JSON.stringify({
