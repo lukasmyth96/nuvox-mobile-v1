@@ -32,9 +32,8 @@ class CollectedSessionViewSet(viewsets.ModelViewSet):
     # permission_classes = [IsAuthenticated]  # TODO uncomment after testing
 
     def perform_create(self, serializer):
-        swipe = serializer.instsance
         trace_matches_text = trace_matches_target_text(
-            trace=swipe.trace,
-            target_text=swipe.target_text
+            trace=serializer.data['trace'],
+            target_text=serializer.data['target_text']
         )
         serializer.save(user=self.request.user, trace_matches_text=trace_matches_text)
