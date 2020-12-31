@@ -83,7 +83,7 @@ if __name__ == '__main__':
                         ranked_token_probs=ranked_token_probs,
                         tokenizer=tokenizer,
                         keyboard=keyboard,
-                        target_key_id_sequence=keyboard.text_to_key_id_sequence(
+                        target_key_id_sequence=keyboard.text_to_kis(
                             text=true_next_token,
                             skip_invalid_chars=True
                         ),

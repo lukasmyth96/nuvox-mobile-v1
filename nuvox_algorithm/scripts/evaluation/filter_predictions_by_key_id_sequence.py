@@ -19,7 +19,7 @@ def filter_predictions_by_key_id_sequence(ranked_token_ids: List[int],
     filtered_ranked_token_probs = []
     for token_id, token_prob in zip(ranked_token_ids, ranked_token_probs):
         token = tokenizer._convert_id_to_token(token_id)
-        token_kis = keyboard.text_to_key_id_sequence(
+        token_kis = keyboard.text_to_kis(
             text=token,
             skip_invalid_chars=True
         )
