@@ -26,7 +26,7 @@ def random_word(request):
     return JsonResponse({'word': word})
 
 
-class CollectedSessionViewSet(viewsets.ModelViewSet):
+class DataCollectionSwipeViewSet(viewsets.ModelViewSet):
     queryset = DataCollectionSwipe.objects.all()
     serializer_class = DataCollectionSwipeSerializer
     http_method_names = ['post']
