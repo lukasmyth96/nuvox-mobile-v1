@@ -2,6 +2,9 @@ from typing import List, Dict
 
 from django.core.exceptions import ValidationError
 
+from nuvox_algorithm.utils.list_funcs import all_subsequences
+from nuvox_algorithm.core import Keyboard, nuvox_key_list
+
 
 def validate_trace(trace: List[Dict[str, float]]):
     """Validate that trace is List[Dict[str, float]] where
@@ -31,4 +34,7 @@ def validate_trace_point(trace_point: Dict[str, float]):
 
 def validate_trace_matches_target_text(trace: List[Dict[str, float]],
                                        target_text: str):
-    pass
+    keyboard = Keyboard(keys=nuvox_key_list)
+    trace_kis = keyboard.trace_to_kis(trace)
+    target_text_kis = keyboard.text_to_kis(target_text, skip_invalid_chars=True)
+
