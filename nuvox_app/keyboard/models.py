@@ -26,7 +26,7 @@ class BaseSwipe(models.Model):
 
 class DataCollectionSwipe(BaseSwipe):
     target_text = models.CharField(max_length=255)
-    trace_matches_text = models.BooleanField(null=True, blank=True)
+    trace_matches_text = models.BooleanField()  # is trace sufficiently accurate.
 
     def __str__(self):
         return f'target_text: {self.target_text} - trace_matches_text: {self.trace_matches_text}'

@@ -1,7 +1,6 @@
 from rest_framework import serializers
 
 from keyboard.models import DataCollectionSwipe
-from keyboard.validators import validate_trace_matches_target_text
 
 
 class DataCollectionSwipeSerializer(serializers.ModelSerializer):

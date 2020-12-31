@@ -9,6 +9,7 @@ from wordfreq import top_n_list
 
 from keyboard.models import DataCollectionSwipe
 from keyboard.serializers import DataCollectionSwipeSerializer
+from keyboard.validators import trace_matches_target_text
 
 
 @login_required()
@@ -31,4 +32,9 @@ class CollectedSessionViewSet(viewsets.ModelViewSet):
     # permission_classes = [IsAuthenticated]  # TODO uncomment after testing
 
     def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
+        swipe = serializer.instsance
+        trace_matches_text = trace_matches_target_text(
+            trace=swipe.trace,
+            target_text=swipe.target_text
+        )
+        serializer.save(user=self.request.user, trace_matches_text=trace_matches_text)
