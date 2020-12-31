@@ -3,6 +3,7 @@ let canvas, ctx;
 
 let targetText;
 
+let gameInProgress = false;
 let gameId;
 
 // Record swipe trace, a sequence of objects containing the x and y coordinates at each time-step.
@@ -119,16 +120,15 @@ function onMouseMove(e) {
 
 // Keep track of the mouse button being released
 function onMouseUp() {
+
+    if (gameInProgress) {
+        submitSwipe();
+        setNewTargetWord();
+    }
+
     mouseDown = 0;
-
-    submitSwipe();
-
     clearCanvas(canvas, ctx);
-
     clearTrace();
-
-    setNewTargetWord();
-
     // Reset lastX and lastY to -1 to indicate that they are now invalid, since we have lifted the "pen"
     lastX = -1;
     lastY = -1;
@@ -160,17 +160,17 @@ function onTouchStart() {
 }
 
 function onTouchEnd() {
+
+    if (gameInProgress) {
+        submitSwipe();
+        setNewTargetWord();
+    }
+
+    clearCanvas(canvas, ctx);
+    clearTrace();
     // Reset lastX and lastY to -1 to indicate that they are now invalid, since we have lifted the "pen"
     lastX = -1;
     lastY = -1;
-
-    submitSwipe();
-
-    clearCanvas(canvas, ctx);
-
-    clearTrace();
-
-    setNewTargetWord();
 
 }
 
