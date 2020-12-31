@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django_user_agents',
     'rest_framework',
     'users.apps.UsersConfig',
+    'games.apps.GamesConfig',
     'keyboard.apps.KeyboardConfig',
 ]
 
