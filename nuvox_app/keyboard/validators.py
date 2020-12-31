@@ -42,7 +42,12 @@ def validate_trace_point(trace_point: Dict[str, float]):
 
 def trace_matches_target_text(trace: List[Dict[str, float]],
                               target_text: str) -> bool:
-    """Returns True if trace matches target text else False."""
+    """Returns True if trace is valid and matches target text else False."""
+    try:
+        validate_trace(trace)
+    except ValidationError:
+        return False
+
     keyboard = Keyboard(keys=nuvox_key_list)
     trace_kis = keyboard.trace_to_kis(trace)
     target_text_kis = keyboard.text_to_kis(target_text, skip_invalid_chars=True)
