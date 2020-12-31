@@ -41,7 +41,7 @@ def validate_trace_matches_target_text(trace: List[Dict[str, float]],
         raise ValidationError(f'Expected trace to start at key {target_text_kis[0]} but it started at key {trace_kis[0]}')
 
     if trace_kis[-1] != target_text_kis[-1]:
-        raise ValidationError(f'Expected trace to start at key {target_text_kis[-1]} but it started at key {trace_kis[-1]}')
+        raise ValidationError(f'Expected trace to end at key {target_text_kis[-1]} but it started at key {trace_kis[-1]}')
 
     if target_text_kis not in all_char_subsequences(trace_kis):
         raise ValidationError(f'Trace KIS {trace_kis} not contained in expected KIS {target_text_kis}')
