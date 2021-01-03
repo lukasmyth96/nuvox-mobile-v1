@@ -14,3 +14,11 @@ class Game(models.Model):
     def has_expired(self) -> bool:
         """Returns True if game was created over 60s ago."""
         return (datetime.now(tz=self.created_on.tzinfo) - self.created_on).total_seconds() > 61
+
+    @property
+    def successful_swipes(self):
+        return self.swipes.filter(trace_matches_text=True)
+
+    @property
+    def unsuccessful_swipes(self):
+        return self.swipes.filter(trace_matches_text=False)
