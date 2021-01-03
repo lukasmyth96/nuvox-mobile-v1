@@ -130,7 +130,7 @@ function onMouseMove(e) {
 // Keep track of the mouse button being released
 function onMouseUp() {
 
-    if (gameInProgress) {
+    if (gameInProgress && trace.length > 0) {
         submitSwipe();
         setNewTargetWord();
     }
@@ -170,7 +170,7 @@ function onTouchStart() {
 
 function onTouchEnd() {
 
-    if (gameInProgress) {
+    if (gameInProgress && trace.length > 0) {
         submitSwipe();
         setNewTargetWord();
     }

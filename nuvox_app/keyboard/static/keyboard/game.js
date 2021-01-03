@@ -25,7 +25,6 @@ function endGame() {
     $('#end-game-button').hide();
     setTimeout(function () {
         // 10ms delay to allow browser to repaint first.
-        alert("Game Over");
+        $('#game-over-modal').modal('show');
     }, 10)
 }
-
