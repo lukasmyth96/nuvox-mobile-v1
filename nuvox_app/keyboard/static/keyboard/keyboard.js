@@ -5,6 +5,7 @@ let targetText;
 
 let gameInProgress = false;
 let gameId;
+let gameTimer;
 
 // Record swipe trace, a sequence of objects containing the x and y coordinates at each time-step.
 // Note - coordinates are relative to the canvas.

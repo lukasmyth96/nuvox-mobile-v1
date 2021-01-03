@@ -3,10 +3,9 @@
 function resetTimer() {
     let secondsRemaining = 10;
     setCountdown(secondsRemaining);
-    const downloadTimer = setInterval(function(){
+    gameTimer = setInterval(function(){
       if(secondsRemaining <= 0){
-        clearInterval(downloadTimer);
-        onGameOver();
+        endGame();
       }
       setCountdown(secondsRemaining);
       secondsRemaining -= 1;
@@ -17,8 +16,12 @@ function setCountdown(secondsRemaining) {
     document.getElementById("countdown").innerHTML = secondsRemaining.toString();
 }
 
-function onGameOver() {
+function endGame() {
+    clearInterval(gameTimer);
+    setCountdown(0);
     gameInProgress = false;
     gameId = undefined;
+    $('#start-game-button').show();
+    $('#end-game-button').hide();
     alert('Game Over!');
 }

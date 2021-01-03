@@ -19,8 +19,8 @@ function startNewGame() {
         // Set the initial target word.
         setNewTargetWord();
 
-        // hide the start game button.
         $('#start-game-button').hide();
+        $('#end-game-button').show();
 
         // show the target word element.
         $('#target-word').show();
@@ -62,9 +62,7 @@ function submitSwipe() {
             dataType: 'json',
         }
     ).done(function (data) {
-        if (data.trace_matches_text === true) {
-            alert('Thanks :)')
-        } else {
+        if (data.trace_matches_text === false) {
             alert('Trace was not accurate :(')
         }
     }).fail(function (jqXHR, exception) {
