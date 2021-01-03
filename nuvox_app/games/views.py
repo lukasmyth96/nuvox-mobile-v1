@@ -19,6 +19,8 @@ class GameViewSet(viewsets.ModelViewSet):
 
 @require_http_methods(['GET'])
 def leaderboard(request):
+    """Returns list of dicts containing user (username) and score
+    for top n entrants."""
     games = list(Game.objects.all())
     games.sort(key=lambda game: len(game.successful_swipes), reverse=True)
     top_games = games[:5]
