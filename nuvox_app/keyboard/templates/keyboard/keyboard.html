@@ -6,6 +6,7 @@
     <link rel="stylesheet" type="text/css" href="{% static 'keyboard/keyboard.css' %}">
     <script src={% static 'keyboard/keyboard_ajax.js' %}></script>
     <script src={% static 'keyboard/keyboard.js' %}></script>
+    <script src={% static 'keyboard/game.js' %}></script>
     {{ is_mobile|json_script:"is_mobile" }}
     <script>
         const isMobile = JSON.parse(document.getElementById('is_mobile').textContent);
@@ -29,7 +30,7 @@
             </h1>
         </div>
         <div class="col-sm d-flex justify-content-center">
-            Timer
+            <h1 id="countdown"></h1>
         </div>
       </div>
     </div>

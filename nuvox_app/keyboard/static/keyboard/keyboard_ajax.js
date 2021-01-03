@@ -13,6 +13,9 @@ function startNewGame() {
         gameInProgress = true;
         gameId = data.id;
 
+        // Reset timer
+        resetTimer();
+
         // Set the initial target word.
         setNewTargetWord();
 
