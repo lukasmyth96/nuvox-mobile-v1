@@ -23,5 +23,9 @@ function endGame() {
     gameId = undefined;
     $('#start-game-button').show();
     $('#end-game-button').hide();
-    alert('Game Over!');
+    setTimeout(function () {
+        // 10ms delay to allow browser to repaint first.
+        alert("Game Over");
+    }, 10)
 }
+
