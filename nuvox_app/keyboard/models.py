@@ -34,7 +34,7 @@ class BaseSwipe(models.Model):
 
 
 class DataCollectionSwipe(BaseSwipe):
-    game = models.ForeignKey(to=Game, on_delete=models.CASCADE, related_name='games', validators=[validate_game_has_not_expired])
+    game = models.ForeignKey(to=Game, on_delete=models.CASCADE, related_name='swipes', validators=[validate_game_has_not_expired])
     target_text = models.CharField(max_length=255)
     trace_matches_text = models.BooleanField()  # is trace sufficiently accurate.
 
