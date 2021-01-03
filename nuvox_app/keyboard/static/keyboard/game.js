@@ -1,7 +1,7 @@
 // JS functions related to the keyboard game.
 
 function resetTimer() {
-    let secondsRemaining = 10;
+    let secondsRemaining = 60;
     setCountdown(secondsRemaining);
     gameTimer = setInterval(function(){
       if(secondsRemaining <= 0){
