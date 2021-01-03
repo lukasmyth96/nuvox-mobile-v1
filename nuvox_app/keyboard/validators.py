@@ -36,8 +36,11 @@ def validate_trace_point(trace_point: Dict[str, float]):
         raise ValidationError(f'Each trace point have keys x, y, t but found'
                               f'point with keys: {trace_point}')
 
-    if not all([isinstance(val, float) for val in trace_point.values()]):
-        raise ValidationError(f'Each trace point value must a float')
+    if not (isinstance(trace_point.get('x'), float) and isinstance(trace_point.get('y'), float)):
+        raise ValidationError(f'Each trace coordinate value must a float.')
+
+    if not (isinstance(trace_point.get('t'), float) or isinstance(trace_point.get('t'), int)):
+        raise ValidationError(f'Each trace time value must a float or int.')
 
 
 def trace_matches_target_text(trace: List[Dict[str, float]],
