@@ -23,8 +23,11 @@ function endGame() {
     gameId = undefined;
     $('#start-game-button').show();
     $('#end-game-button').hide();
+}
+
+function showEndGameModal(leaderboardData) {
     setTimeout(function () {
         // 10ms delay to allow browser to repaint first.
-        $('#game-over-modal').modal('show');
+        showLeaderboard();
     }, 10)
 }

@@ -70,3 +70,17 @@ function submitSwipe() {
         }
     )
 }
+
+function showLeaderboard() {
+    $.ajax({
+            url: '/api/leaderboard',
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('X-CSRFToken', csrfToken);
+            },
+            dataType: 'json',
+        }
+    ).done(function (data) {
+            $('#game-over-modal').modal('show');
+        }
+    )
+}
