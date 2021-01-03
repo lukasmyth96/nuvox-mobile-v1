@@ -23,6 +23,6 @@ def leaderboard(request):
     for top n entrants."""
     games = list(Game.objects.all())
     games.sort(key=lambda game: len(game.successful_swipes), reverse=True)
-    top_games = games[:5]
+    top_games = games[:10]
     response = [{'user': game.user.username, 'score': len(game.successful_swipes)} for game in top_games]
     return JsonResponse(response, safe=False)

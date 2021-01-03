@@ -28,6 +28,10 @@
     background-size: 100% 100%;
 }
 
+#game-over-modal {
+    overflow: auto !important;
+}
+
 table {
   font-family: arial, sans-serif;
   border-collapse: collapse;
