@@ -80,6 +80,7 @@ function showLeaderboard() {
             dataType: 'json',
         }
     ).done(function (data) {
+            buildHtmlTable('#leaderboard-table', data)
             $('#game-over-modal').modal('show');
         }
     )
