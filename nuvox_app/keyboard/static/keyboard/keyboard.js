@@ -79,7 +79,9 @@ function updateMouseTrace() {
     const x = mouseX / canvas.width;
     const y = mouseY / canvas.height;
     const t = getSecondsSinceTraceStart();
-    trace.push({x, y, t});
+    if (isTracePointValid(x, y)) {
+         trace.push({x, y, t});
+    }
 }
 
 // Update trace with latest touch position relative to canvas.
@@ -87,7 +89,13 @@ function updateTouchTrace() {
     const x = touchX / canvas.width;
     const y = touchY / canvas.height;
     const t = getSecondsSinceTraceStart();
-    trace.push({x, y, t});
+    if (isTracePointValid(x, y)) {
+         trace.push({x, y, t});
+    }
+}
+
+function isTracePointValid(x, y) {
+    return ((0.0 <= x) && (x <= 1.0) && (0.0 <= y) && (y <= 1.0));
 }
 
 function getSecondsSinceTraceStart() {
