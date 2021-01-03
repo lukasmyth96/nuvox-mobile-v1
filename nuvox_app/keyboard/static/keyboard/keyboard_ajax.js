@@ -1,3 +1,5 @@
+// Ajax functions
+
 function startNewGame() {
     $.ajax({
             url: '/api/games/',
@@ -31,7 +33,7 @@ function setNewTargetWord() {
     ).done(
         function (data) {
             targetText = data.word;
-            $('#target-word').text(`Please swype the word: ${data.word}`);
+            $('#target-word').text(data.word);
         }
     );
 }

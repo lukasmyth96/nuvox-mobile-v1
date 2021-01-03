@@ -16,13 +16,22 @@
 {% endblock head %}
 
 {% block content %}
-    <div id="keyboard-top-section">
-        <button id="start-game-button" class="btn btn-success" onclick="startNewGame()">
-            Start Game
-        </button>
-        <h1 id="target-word" style="display: none">
-            <!--Element text is set dynamically by js.-->
-        </h1>
+    <div id="top-section-container" class="container">
+      <div class="row">
+        <div class="col-sm d-flex justify-content-center">
+            <button id="start-game-button" class="btn btn-success btn-lg" onclick="startNewGame()">
+                Start Game
+            </button>
+        </div>
+        <div class="col-sm d-flex justify-content-center">
+            <h1 id="target-word" style="display: none">
+                <!--Element text is set dynamically by js.-->
+            </h1>
+        </div>
+        <div class="col-sm d-flex justify-content-center">
+            Timer
+        </div>
+      </div>
     </div>
     <div id="sketchpadapp">
         <canvas id="sketchpad"

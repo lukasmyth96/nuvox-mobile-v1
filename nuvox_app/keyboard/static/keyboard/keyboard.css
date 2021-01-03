@@ -1,16 +1,14 @@
-#keyboard-top-section{
-    text-align: center;
+#top-section-container{
     height: 20vh;
+    padding: 10vh;
 }
 
 #start-game-button{
-    padding-top: 10vh;
 }
 
 #target-word{
-    font-size: 32pt;
+    font-size: 20pt;
     font-weight: bolder;
-    padding-top: 10vh;
 }
 
 #sketchpadapp {
