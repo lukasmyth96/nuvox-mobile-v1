@@ -1,14 +1,13 @@
 import os
-from typing import List, Tuple
 
 import numpy as np
-from transformers import AutoModelForCausalLM, AutoTokenizer, PreTrainedTokenizer
+from transformers import AutoModelForCausalLM, AutoTokenizer
 from torch.nn import functional as F
 from tqdm import tqdm
 
 from nuvox_algorithm.utils.io_funcs import read_text_file
 from nuvox_algorithm.core import Keyboard, nuvox_key_list
-from nuvox_algorithm.scripts.evaluation.filter_predictions_by_key_id_sequence import filter_predictions_by_key_id_sequence
+from nuvox_algorithm.scripts.evaluation.language_model_evaluation.filter_predictions_by_key_id_sequence import filter_predictions_by_key_id_sequence
 
 
 if __name__ == '__main__':
