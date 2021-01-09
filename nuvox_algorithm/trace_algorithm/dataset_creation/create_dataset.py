@@ -2,7 +2,7 @@ from typing import List
 
 from nuvox_algorithm.core import Keyboard
 from nuvox_algorithm.utils.io_funcs import read_json_file
-from nuvox_algorithm.trace_algorithm.swipe import Swipe
+from nuvox_algorithm.trace_algorithm.swipe import Swipe, TracePoint
 
 
 def create_dataset(data_dump_file_path: str,
@@ -18,7 +18,7 @@ def create_dataset(data_dump_file_path: str,
         swipe = Swipe(
             id=swipe_dict['pk'],
             user_id=fields['user'],
-            trace=fields['trace'],
+            trace=[TracePoint(**trace_point) for trace_point in fields['trace']],
             target_text=fields['target_text'],
             target_kis=keyboard.text_to_kis(text=fields['target_text'], skip_invalid_chars=True),
             trace_matches_text=fields['trace_matches_text']
@@ -42,4 +42,4 @@ if __name__ == '__main__':
         keyboard=_keyboard,
         remove_inaccurate_swipes=True
     )
-
+    print('stop here')
