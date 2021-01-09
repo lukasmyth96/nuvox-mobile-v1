@@ -14,6 +14,18 @@ def ranked_key_id_sequences(kis_to_predicted_proba: Dict[str, float]) -> List[st
 
 if __name__ == '__main__':
 
+    """
+    This script evaluates your trace algorithm on a dataset of collected swipes stored in
+    a JSON file. Once complete it will print the top-1 and top-3 accuracy of your algorithm.
+    
+    Notes
+    ------
+    - If your trace algorithm uses a machine learning model then you should edit this script
+    so that you do not evaluate on swipes that were used during training.
+    - The JSON file should be a database dump generated with the following command:
+     'django-admin dumpdata keyboard.DataCollectionSwipe --output <OUTPUT PATH>'.
+    """
+
     # Load Swipes from data dump JSON file.
     keyboard = Keyboard(keys=nuvox_key_list)
     swipes = create_dataset(
@@ -22,7 +34,7 @@ if __name__ == '__main__':
         remove_inaccurate_swipes=True
     )
 
-    # Instantiate your TraceAlgorithm
+    # Instantiate your TraceAlgorithm here, passing any parameters you require.
     trace_algorithm = TraceAlgorithm()
 
     # Metrics
