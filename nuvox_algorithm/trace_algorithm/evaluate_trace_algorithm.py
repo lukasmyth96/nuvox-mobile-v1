@@ -26,15 +26,18 @@ if __name__ == '__main__':
      'django-admin dumpdata keyboard.DataCollectionSwipe --output <OUTPUT PATH>'.
     """
 
-    # Load Swipes from data dump JSON file.
+    # Set this to your local file path!
+    DATA_DUMP_JSON_FILE = '/trace_algorithm_dataset_09_01_2021.json'
+
+    # Load dataset of Swipes from data dump JSON file.
     keyboard = Keyboard(keys=nuvox_key_list)
     swipes = create_dataset(
-        data_dump_file_path='/trace_algorithm_dataset_09_01_2021.json',
+        data_dump_file_path=DATA_DUMP_JSON_FILE,
         keyboard=keyboard,
         remove_inaccurate_swipes=True
     )
 
-    # Instantiate your TraceAlgorithm here, passing any parameters you require.
+    # Instantiate your TraceAlgorithm here.
     trace_algorithm = TraceAlgorithm()
 
     # Metrics
