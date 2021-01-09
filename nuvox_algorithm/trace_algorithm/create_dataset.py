@@ -36,7 +36,7 @@ if __name__ == '__main__':
     """Example Usage."""
     from nuvox_algorithm.core import nuvox_key_list
     _keyboard = Keyboard(keys=nuvox_key_list)
-    _data_dump_file_path = '/home/luka/PycharmProjects/nuvox-mobile/nuvox_app/swipes.json'
+    _data_dump_file_path = '/swipes.json'
     dataset = create_dataset(
         data_dump_file_path=_data_dump_file_path,
         keyboard=_keyboard,
