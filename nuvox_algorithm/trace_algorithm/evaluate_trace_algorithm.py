@@ -29,7 +29,7 @@ if __name__ == '__main__':
     # Load Swipes from data dump JSON file.
     keyboard = Keyboard(keys=nuvox_key_list)
     swipes = create_dataset(
-        data_dump_file_path='/home/luka/PycharmProjects/nuvox-mobile/nuvox_app/swipes.json',
+        data_dump_file_path='/trace_algorithm_dataset_09_01_2021.json',
         keyboard=keyboard,
         remove_inaccurate_swipes=True
     )
