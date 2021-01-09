@@ -20,6 +20,13 @@ the algorithm back to eye-tracking once perfected.
 
 ***
 
+## Repo Structure
+The repo is divided into two parts
+- `/nuvox_algorithm` contains everything related to the predictive text algorithms.
+- `/nuvox_app` contains a Django project which I've been using to collect training data!
+
+***
+
 ## Development Guide
 
 ### Installation
