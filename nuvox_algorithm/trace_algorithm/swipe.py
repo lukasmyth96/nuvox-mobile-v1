@@ -4,9 +4,9 @@ from typing import List
 
 @dataclass
 class TracePoint:
-    x: float
-    y: float
-    t: float
+    x: float  # x∈(0, 1) is x coordinate relative to top-left of key pad.
+    y: float  # y∈(0, 1) is y coordinate relative to top-left of key pad
+    t: float  # t∈ℝ is the time (s) at which this point was recorded relative to start of swipe.
 
     def __post_init__(self):
         assert 0.0 <= self.x <= 1.0
