@@ -1,6 +1,7 @@
 from typing import Dict, List
 
 import numpy as np
+from tqdm import tqdm
 
 from nuvox_algorithm.trace_algorithm.utils.load_dataset import load_dataset
 from nuvox_algorithm.trace_algorithm.trace_algorithm import TraceAlgorithm
@@ -32,7 +33,8 @@ if __name__ == '__main__':
     top1_acc_list = []  # list of bools indicating whether top prediction for each swipe was correct.
     top3_acc_list = []  # list of bools indicating whether true KIS was in top-3 predictions for each swipe.
 
-    for swipe in swipes:
+    print(f'Evaluating your algorithm on {len(swipes)} swipes...')
+    for swipe in tqdm(swipes):
 
         kis_to_predicted_proba = trace_algorithm.predict_intended_kis(trace=swipe.trace)
         ranked_kis = ranked_key_id_sequences(kis_to_predicted_proba)
