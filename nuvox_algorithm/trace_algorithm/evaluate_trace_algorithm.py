@@ -22,20 +22,10 @@ if __name__ == '__main__':
     ------
     - If your trace algorithm uses a machine learning model then you should edit this script
     so that you do not evaluate on swipes that were used during training.
-    - The JSON file should be a database dump generated with the following command:
-     'django-admin dumpdata keyboard.DataCollectionSwipe --output <OUTPUT PATH>'.
     """
-
-    # Set this to your local file path!
-    DATA_DUMP_JSON_FILE = '/trace_algorithm_dataset_09_01_2021.json'
-
     # Load dataset of Swipes from data dump JSON file.
     keyboard = Keyboard(keys=nuvox_key_list)
-    swipes = load_dataset(
-        data_dump_file_path=DATA_DUMP_JSON_FILE,
-        keyboard=keyboard,
-        remove_inaccurate_swipes=True
-    )
+    swipes = load_dataset(remove_inaccurate_swipes=True)
 
     # Instantiate your TraceAlgorithm here.
     trace_algorithm = TraceAlgorithm()
