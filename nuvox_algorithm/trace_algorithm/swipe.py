@@ -26,7 +26,7 @@ class Swipe:
     device_type: str                # pc/mobile/tablet
     trace: List[TracePoint]         # List of TracePoint objects.
     target_text: str                # Word user intended to swipe.
-    target_kis: str                 # Target key-id-sequence.
+    target_kis: str                 # Target key-id-sequence e.g. if target_text='hello' then target_kis='3246'.
     trace_matches_text: bool        # Whether trace sufficiently matches text.
 
     def __repr__(self):
