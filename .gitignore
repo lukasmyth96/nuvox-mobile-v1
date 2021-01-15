@@ -127,3 +127,6 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# nuvox specific
+nuvox_algorithm/trace_algorithm/dataset.json
