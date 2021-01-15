@@ -3,7 +3,7 @@ from typing import Dict, List
 import numpy as np
 
 from nuvox_algorithm.core import Keyboard, nuvox_key_list
-from nuvox_algorithm.trace_algorithm.load_dataset import load_dataset
+from nuvox_algorithm.trace_algorithm.utils.load_dataset import load_dataset
 from nuvox_algorithm.trace_algorithm.trace_algorithm import TraceAlgorithm
 
 
