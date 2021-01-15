@@ -9,8 +9,8 @@ from nuvox_algorithm.trace_algorithm.utils import download_trace_algorithm_datas
 
 
 def load_dataset(remove_inaccurate_swipes: Optional[bool] = True) -> List[Swipe]:
-    """Parses JSON file containing dump of Swipe table and
-    returns a list of Swipe objects."""
+    """Parses JSON file containing dataset of Swipes and returns
+    list of convenient Swipe objects."""
 
     if not os.path.exists(TRACE_ALGORITHM_DATASET_PATH):
         download_trace_algorithm_dataset()
@@ -23,7 +23,8 @@ def load_dataset(remove_inaccurate_swipes: Optional[bool] = True) -> List[Swipe]
             id=swipe_dict['pk'],
             user_id=fields['user'],
             device_type=fields['device_type'],
-            trace=[TracePoint(**trace_point) for trace_point in fields['trace']],
+            trace=[TracePoint(**trace_point, key_id=nuvox_keyboard.key_at_point(trace_point['x'], trace_point['y']).id)
+                   for trace_point in fields['trace']],
             target_text=fields['target_text'],
             target_kis=nuvox_keyboard.text_to_kis(text=fields['target_text'], skip_invalid_chars=True),
             trace_matches_text=fields['trace_matches_text']
