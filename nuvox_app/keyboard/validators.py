@@ -4,7 +4,7 @@ from typing import List, Dict
 from django.core.exceptions import ValidationError
 
 from nuvox_algorithm.utils.string_funcs import all_char_subsequences
-from nuvox_algorithm.core import Keyboard, nuvox_key_list
+from nuvox_algorithm.core import Keyboard, nuvox_keys
 
 from games.models import Game
 
@@ -48,7 +48,7 @@ def trace_matches_target_text(trace: List[Dict[str, float]],
     except ValidationError:
         return False
 
-    keyboard = Keyboard(keys=nuvox_key_list)
+    keyboard = Keyboard(keys=nuvox_keys)
     trace_kis = keyboard.trace_to_kis(trace)
     target_text_kis = keyboard.text_to_kis(target_text, skip_invalid_chars=True)
     return (trace_kis[0] == target_text_kis[0]) and \

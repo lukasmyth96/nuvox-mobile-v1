@@ -2,7 +2,7 @@ import os
 from typing import List, Optional
 
 from definition import TRACE_ALGORITHM_DATASET_PATH
-from nuvox_algorithm.core import Keyboard, nuvox_key_list
+from nuvox_algorithm.core import Keyboard, nuvox_keys
 from nuvox_algorithm.utils.io_funcs import read_json_file
 from nuvox_algorithm.trace_algorithm.swipe import Swipe, TracePoint
 from nuvox_algorithm.trace_algorithm.utils import download_trace_algorithm_dataset
@@ -11,7 +11,7 @@ from nuvox_algorithm.trace_algorithm.utils import download_trace_algorithm_datas
 def load_dataset(remove_inaccurate_swipes: Optional[bool] = True) -> List[Swipe]:
     """Parses JSON file containing dump of Swipe table and
     returns a list of Swipe objects."""
-    keyboard = Keyboard(keys=nuvox_key_list)
+    keyboard = Keyboard(keys=nuvox_keys)
 
     if not os.path.exists(TRACE_ALGORITHM_DATASET_PATH):
         download_trace_algorithm_dataset()

@@ -8,6 +8,15 @@ from .key import Key
 class Keyboard:
 
     def __init__(self, keys: List[Key]):
+        """Class encapsulating the keyboard. Layout of keyboard is defined
+        by passing a list of Key objects, each of which specifies its location
+        and contents.
+
+        Notes
+        ------
+        - See nuvox_algorithm/core/nuvox_keyboard contains an instance of this class
+        that corresponds to the actual 9-key nuvox keyboard layout.
+        """
         self.keys = keys
         self.key_id_to_chars: Dict[str, List[str]] = {key.id: key.chars for key in keys}
         self.char_to_key_id: Dict[str, str] = {char: key.id for key in keys for char in key.chars}

@@ -6,7 +6,7 @@ from torch.nn import functional as F
 from tqdm import tqdm
 
 from nuvox_algorithm.utils.io_funcs import read_text_file
-from nuvox_algorithm.core import Keyboard, nuvox_key_list
+from nuvox_algorithm.core import Keyboard, nuvox_keys
 from nuvox_algorithm.scripts.evaluation.language_model_evaluation.filter_predictions_by_key_id_sequence import filter_predictions_by_key_id_sequence
 
 
@@ -28,7 +28,7 @@ if __name__ == '__main__':
 
     tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
     model = AutoModelForCausalLM.from_pretrained(MODEL_NAME)
-    keyboard = Keyboard(keys=nuvox_key_list)
+    keyboard = Keyboard(keys=nuvox_keys)
 
     # List[bool], whether the top predicted word is correct for each word.
     top_1_accuracy_list = []
