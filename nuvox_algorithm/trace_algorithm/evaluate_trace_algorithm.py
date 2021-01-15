@@ -3,7 +3,7 @@ from typing import Dict, List
 import numpy as np
 
 from nuvox_algorithm.core import Keyboard, nuvox_key_list
-from nuvox_algorithm.trace_algorithm.create_dataset import create_dataset
+from nuvox_algorithm.trace_algorithm.load_dataset import load_dataset
 from nuvox_algorithm.trace_algorithm.trace_algorithm import TraceAlgorithm
 
 
@@ -31,7 +31,7 @@ if __name__ == '__main__':
 
     # Load dataset of Swipes from data dump JSON file.
     keyboard = Keyboard(keys=nuvox_key_list)
-    swipes = create_dataset(
+    swipes = load_dataset(
         data_dump_file_path=DATA_DUMP_JSON_FILE,
         keyboard=keyboard,
         remove_inaccurate_swipes=True

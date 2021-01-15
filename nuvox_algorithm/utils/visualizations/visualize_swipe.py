@@ -6,7 +6,7 @@ import random
 
 from nuvox_algorithm.core import nuvox_key_list, Keyboard
 from nuvox_algorithm.trace_algorithm.swipe import Swipe
-from nuvox_algorithm.trace_algorithm.create_dataset import create_dataset
+from nuvox_algorithm.trace_algorithm.load_dataset import load_dataset
 
 
 def visualize_swipe(swipe: Swipe, keyboard_img_file_path: str):
@@ -35,7 +35,7 @@ if __name__ == '__main__':
     keyboard = Keyboard(keys=nuvox_key_list)
     data_dump_file_path = '/home/luka/PycharmProjects/nuvox-mobile/nuvox_app/trace_algorithm_dataset_09_01_2021.json'
     keyboard_img_file_path = '/home/luka/PycharmProjects/nuvox-mobile/nuvox_app/keyboard/static/keyboard/assets/nuvox_keyboard_img.png'
-    swipes = create_dataset(
+    swipes = load_dataset(
         data_dump_file_path=data_dump_file_path,
         keyboard=keyboard,
         remove_inaccurate_swipes=True

@@ -1,17 +1,22 @@
-from typing import List
+import os
+from typing import List, Optional
 
+from definition import TRACE_ALGORITHM_DATASET_PATH
 from nuvox_algorithm.core import Keyboard
 from nuvox_algorithm.utils.io_funcs import read_json_file
 from nuvox_algorithm.trace_algorithm.swipe import Swipe, TracePoint
+from nuvox_algorithm.trace_algorithm.utils import download_trace_algorithm_dataset
 
 
-def create_dataset(data_dump_file_path: str,
-                   keyboard: Keyboard,
-                   remove_inaccurate_swipes: bool) -> List[Swipe]:
+def load_dataset(keyboard: Keyboard,
+                 remove_inaccurate_swipes: Optional[bool] = True) -> List[Swipe]:
     """Parses JSON file containing dump of Swipe table and
     returns a list of Swipe objects."""
 
-    json_data = read_json_file(data_dump_file_path)
+    if not os.path.exists(TRACE_ALGORITHM_DATASET_PATH):
+        download_trace_algorithm_dataset()
+
+    json_data = read_json_file(TRACE_ALGORITHM_DATASET_PATH)
     swipes = []
     for swipe_dict in json_data:
         fields = swipe_dict['fields']
@@ -31,16 +36,3 @@ def create_dataset(data_dump_file_path: str,
         swipes = [swipe for swipe in swipes if swipe.trace_matches_text]
 
     return swipes
-
-
-if __name__ == '__main__':
-    """Example Usage."""
-    from nuvox_algorithm.core import nuvox_key_list
-    _keyboard = Keyboard(keys=nuvox_key_list)
-    _data_dump_file_path = '/home/luka/PycharmProjects/nuvox-mobile/nuvox_app/trace_algorithm_dataset_09_01_2021.json'
-    dataset = create_dataset(
-        data_dump_file_path=_data_dump_file_path,
-        keyboard=_keyboard,
-        remove_inaccurate_swipes=True
-    )
-    print('stop here')
