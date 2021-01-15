@@ -18,6 +18,7 @@ def create_dataset(data_dump_file_path: str,
         swipe = Swipe(
             id=swipe_dict['pk'],
             user_id=fields['user'],
+            device_type=fields['device_type'],
             trace=[TracePoint(**trace_point) for trace_point in fields['trace']],
             target_text=fields['target_text'],
             target_kis=keyboard.text_to_kis(text=fields['target_text'], skip_invalid_chars=True),
@@ -36,7 +37,7 @@ if __name__ == '__main__':
     """Example Usage."""
     from nuvox_algorithm.core import nuvox_key_list
     _keyboard = Keyboard(keys=nuvox_key_list)
-    _data_dump_file_path = '/trace_algorithm_dataset_09_01_2021.json'
+    _data_dump_file_path = '/home/luka/PycharmProjects/nuvox-mobile/nuvox_app/trace_algorithm_dataset_09_01_2021.json'
     dataset = create_dataset(
         data_dump_file_path=_data_dump_file_path,
         keyboard=_keyboard,

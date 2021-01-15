@@ -20,6 +20,7 @@ class TracePoint:
 class Swipe:
     id: int                         # ID of swipe in database.
     user_id: int                    # ID of user who generated swipe.
+    device_type: str                # pc/mobile/tablet
     trace: List[TracePoint]         # List of TracePoint objects.
     target_text: str                # Word user intended to swipe.
     target_kis: str                 # Target key-id-sequence.
