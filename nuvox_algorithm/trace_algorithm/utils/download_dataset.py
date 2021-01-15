@@ -1,22 +1,31 @@
 import requests
 
-from definition import TRACE_ALGORITHM_DATASET_PATH
+from definition import TRACE_ALGORITHM_DATASET_GDRIVE_ID, TRACE_ALGORITHM_DATASET_PATH
 
 
 def download_trace_algorithm_dataset():
-    download_file_from_google_drive(id='1xHxEiUHyiAlS-qjYE4J2syPOQVQcr_U5', destination=TRACE_ALGORITHM_DATASET_PATH)
+    """Downloads trace algorithm dataset (JSON file) and
+    saves to file.
+
+    Notes
+    - File will be git ignored by default - do NOT attempt to commit it.
+    """
+    download_file_from_google_drive(gdrive_id=TRACE_ALGORITHM_DATASET_GDRIVE_ID, destination=TRACE_ALGORITHM_DATASET_PATH)
 
 
-def download_file_from_google_drive(id, destination):
+def download_file_from_google_drive(gdrive_id: str, destination: str):
+    """Downloads publicly accessible file from Google Drive
+    and saves contents to destination path."""
+
     URL = "https://docs.google.com/uc?export=download"
 
     session = requests.Session()
 
-    response = session.get(URL, params={'id': id}, stream=True)
+    response = session.get(URL, params={'id': gdrive_id}, stream=True)
     token = get_confirm_token(response)
 
     if token:
-        params = {'id': id, 'confirm': token}
+        params = {'id': gdrive_id, 'confirm': token}
         response = session.get(URL, params=params, stream=True)
 
     save_response_content(response, destination)
@@ -40,6 +49,4 @@ def save_response_content(response, destination):
 
 
 if __name__ == "__main__":
-    file_id = '1xHxEiUHyiAlS-qjYE4J2syPOQVQcr_U5'
-    destination = './downloaded_dataset.json'
-    download_file_from_google_drive(file_id, destination)
+    download_file_from_google_drive(TRACE_ALGORITHM_DATASET_GDRIVE_ID, TRACE_ALGORITHM_DATASET_PATH)
