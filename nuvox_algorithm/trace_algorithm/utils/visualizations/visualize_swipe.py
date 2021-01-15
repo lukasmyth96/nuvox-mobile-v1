@@ -5,7 +5,6 @@ import matplotlib; matplotlib.use("TkAgg")
 import matplotlib.pyplot as plt
 import matplotlib.animation
 import matplotlib.image as mpimg
-import matplotlib.cm as cm
 import numpy as np
 
 from definition import KEYBOARD_IMAGE_PATH
