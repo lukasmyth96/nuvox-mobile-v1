@@ -7,8 +7,7 @@ from tqdm import tqdm
 
 from nuvox_algorithm.utils.io_funcs import read_text_file
 from nuvox_algorithm.core import nuvox_keyboard
-from nuvox_algorithm.scripts.evaluation.language_model_evaluation.filter_predictions_by_key_id_sequence import filter_predictions_by_key_id_sequence
-
+from nuvox_algorithm.language_model.evaluation.filter_predictions_by_key_id_sequence import filter_predictions_by_key_id_sequence
 
 if __name__ == '__main__':
     """
@@ -18,6 +17,14 @@ if __name__ == '__main__':
     - top-3 accuracy (% of prompts for which the model's top-3 predictions contain the true next word)
     - average true token rank (The average ranking of the true next word among the models predictions)
     - average true token prob (The average probability assigned to the true next token.)
+    
+    Notes
+    --------
+    - If FILTER_BY_KEY_ID_SEQUENCE is set to True below then the language model will only consider
+    words whose key-id-sequence (KIS) matches the KIS of the true next word in the sentence. This
+    is used to evaluate the upper bound of performance that can be achieved by the predictive text
+    algorithm as a whole if the trace algorithm was perfect - i.e. it always predicted with 100%
+    confidence the true intended KIS.
     """
 
     # Configuration
