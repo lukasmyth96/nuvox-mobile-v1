@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'games.apps.GamesConfig',
     'keyboard.apps.KeyboardConfig',
+    'competition.apps.CompetitionConfig',
 ]
 
 MIDDLEWARE = [
