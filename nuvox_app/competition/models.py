@@ -13,3 +13,13 @@ class Submission(models.Model):
     top3_accuracy = models.FloatField(validators=[MinValueValidator(0.0), MaxValueValidator(1.0)])
     created_on = models.DateTimeField(auto_now_add=True)
     modified_on = models.DateTimeField(auto_now=True)
+
+    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
+        """Overriding to validate the predictions before saving."""
+        validate_submission_predictions(predictions=self.predictions)
+        super(Submission, self).save(
+            force_insert=force_insert,
+            force_update=force_update,
+            using=using,
+            update_fields=update_fields
+        )
