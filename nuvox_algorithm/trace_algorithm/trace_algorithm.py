@@ -1,5 +1,7 @@
 from typing import Dict, List
 
+import numpy as np
+
 from nuvox_algorithm.trace_algorithm.swipe import TracePoint
 from nuvox_algorithm.utils.list_funcs import filter_adjacent_duplicates
 
@@ -52,6 +54,9 @@ class TraceAlgorithm:
         kis_to_predicted_probability = {
             ''.join(sequence_of_key_ids_passed_over): 1.0
         }
+
+        # The sum of predicted probabilities for each KIS must sum to 1.0.
+        assert np.isclose(sum(kis_to_predicted_probability.values()), 1.0, atol=1e-5)
 
         # If you're interested... this simple algorithm predicts the intended KIS ~10% of the time - hopfully you
         # can do better...
