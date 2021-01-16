@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_filters %}
+
+{% block head %}
+
+{% endblock head %}
+
+{% block content %}
+    <table>
+        <tr>
+            <th>Username</th>
+            <th>Accuracy</th>
+            {% for username, accuracy in ranked_username_accuracy_tuples %}
+                {% if not queue.orderDate %}
+                    <td>{{ username }}</td>
+                    <td>{{ accuracy }}</td>
+                {% endif %}
+            {% endfor %}
+    </table>
+{% endblock content %}
