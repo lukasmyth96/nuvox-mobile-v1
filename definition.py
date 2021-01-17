@@ -6,4 +6,6 @@ TRACE_ALGORITHM_DATASET_GDRIVE_ID = '1xHxEiUHyiAlS-qjYE4J2syPOQVQcr_U5'
 
 TRACE_ALGORITHM_DATASET_PATH = os.path.join(REPO_ROOT_DIR, 'nuvox_algorithm', 'trace_algorithm', 'dataset.json')
 
+TRACE_ALGORITHM_SUBMISSION_PATH = os.path.join(REPO_ROOT_DIR, 'nuvox_algorithm', 'trace_algorithm', 'submission.json')
+
 KEYBOARD_IMAGE_PATH = os.path.join(REPO_ROOT_DIR, 'nuvox_app', 'keyboard', 'static', 'keyboard', 'assets', 'nuvox_keyboard_img.png')
