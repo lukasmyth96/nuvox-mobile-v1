@@ -3,19 +3,41 @@
 {% load crispy_forms_filters %}
 
 {% block head %}
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
 
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
 {% endblock head %}
 
 {% block content %}
-    <table>
-        <tr>
-            <th>Username</th>
-            <th>Accuracy</th>
+    <div style="text-align: center; margin-top: 10%">
+        <h1>Competition Leaderboard</h1>
+        <table>
+            <tr>
+                <th>Username</th>
+                <th>Accuracy</th>
+                <th>Ranking</th>
+            </tr>
             {% for username, accuracy in ranked_username_accuracy_tuples %}
-                {% if not queue.orderDate %}
+                <tr>
                     <td>{{ username }}</td>
                     <td>{{ accuracy }}</td>
-                {% endif %}
+                    <td>{{ forloop.counter }}</td>
+                </tr>
             {% endfor %}
-    </table>
+        </table>
+    </div>
 {% endblock content %}
