@@ -42,7 +42,7 @@
             {% for username, accuracy in ranked_username_accuracy_tuples %}
                 <tr>
                     <td>{{ username }}</td>
-                    <td>{{ accuracy }}</td>
+                    <td>{{ accuracy|floatformat:3 }}</td>
                     <td>{{ forloop.counter }}</td>
                 </tr>
             {% endfor %}
