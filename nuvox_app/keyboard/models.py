@@ -1,3 +1,5 @@
+import random
+
 from django.db import models
 
 from users.models import User
@@ -10,6 +12,18 @@ class DeviceType(models.TextChoices):
     TABLET = ('tablet', 'tablet')
     PC = ('pc', 'pc')
     OTHER = ('other', 'other')
+
+
+class DatasetSplit(models.TextChoices):
+    TRAIN = ('train', 'train')
+    TEST = ('test', 'test')
+
+
+def random_split() -> DatasetSplit:
+    if random.random() < 0.8:
+        return DatasetSplit.TRAIN
+    else:
+        return DatasetSplit.TEST
 
 
 class BaseSwipe(models.Model):
@@ -37,6 +51,7 @@ class DataCollectionSwipe(BaseSwipe):
     game = models.ForeignKey(to=Game, on_delete=models.CASCADE, related_name='swipes', validators=[validate_game_has_not_expired])
     target_text = models.CharField(max_length=255)
     trace_matches_text = models.BooleanField()  # is trace sufficiently accurate.
+    dataset_split = models.CharField(choices=DatasetSplit.choices, max_length=16, default=random_split)
 
     def __str__(self):
         return f'target_text: {self.target_text} - trace_matches_text: {self.trace_matches_text}'
