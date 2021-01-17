@@ -130,4 +130,6 @@ dmypy.json
 
 # nuvox specific
 nuvox_algorithm/trace_algorithm/dataset.json
+nuvox_algorithm/trace_algorithm/train.json
+nuvox_algorithm/trace_algorithm/test.json
 nuvox_algorithm/trace_algorithm/submission.json

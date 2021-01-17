@@ -38,4 +38,3 @@ class SubmissionCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
         form.instance.top1_accuracy = top1_acc
         form.instance.top3_accuracy = top3_acc
         return super(SubmissionCreateView, self).form_valid(form=form)
-
