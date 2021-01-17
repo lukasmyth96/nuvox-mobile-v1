@@ -6,6 +6,7 @@ from django.views.generic import CreateView
 
 from competition.models import Submission
 from competition.forms import SubmissionForm
+from competition.utils import evaluate_submission
 
 
 def competition(request):
@@ -32,6 +33,9 @@ class SubmissionCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     success_message = 'Submission received successfully!'
 
     def form_valid(self, form):
-        """ TODO Add missing fields to instance here."""
         form.instance.user = self.request.user
+        top1_acc, top3_acc = evaluate_submission(predictions=form.instance.predictions)
+        form.instance.top1_accuracy = top1_acc
+        form.instance.top3_accuracy = top3_acc
         return super(SubmissionCreateView, self).form_valid(form=form)
+
