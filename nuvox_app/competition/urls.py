@@ -4,5 +4,5 @@ from competition.views import competition, submissions
 
 urlpatterns = [
     path('competition/', competition, name='competition'),
-    path('submissions/', submissions, name='submissions')
+    path('competition/submissions/', submissions, name='submissions')
 ]
