@@ -3,6 +3,8 @@ from typing import List
 from django.core.exceptions import ValidationError
 import numpy as np
 
+from keyboard.models import DataCollectionSwipe, DatasetSplit
+
 
 def validate_submission_predictions(predictions: List[dict]):
     """Validates submission predictions to ensure that:
@@ -16,8 +18,10 @@ def validate_submission_predictions(predictions: List[dict]):
                 }
             }
         ]
-    2. the sum of predicted probabilities for a given swipe is 1.0 (within floating point tolerance).
-    3. Each KIS is a valid string containing characters 1-9 only, no spaces and no adjacent duplicates.
+    2. Each "id" actually corresponds to a row in the DataCollectionSwipe table.
+    3. Each "id" corresponds to a swipe that has "dataset_split=test"
+    4. the sum of predicted probabilities for a given swipe is 1.0 (within floating point tolerance).
+    5. Each KIS is a valid string containing characters 1-9 only, no spaces and no adjacent duplicates.
     """
     if not isinstance(predictions, list):
         raise ValidationError('Predictions must be a list.')
@@ -32,6 +36,13 @@ def validate_submission_predictions(predictions: List[dict]):
 
         if not isinstance(swipe_id, int):
             raise ValidationError(f'Field "id" must contain integer but found {type(swipe_id).__name__}: {swipe_id}')
+
+        try:
+            swipe = DataCollectionSwipe.objects.get(pk=swipe_id)
+            if not swipe.dataset_split == DatasetSplit.TEST:
+                raise ValidationError(f'Swipe with id {swipe_id} does not belong to test set')
+        except DataCollectionSwipe.DoesNotExist:
+            raise ValidationError(f'No swipe exists in database with id: {swipe_id}')
 
         if not isinstance(prediction, dict):
             raise ValidationError(
