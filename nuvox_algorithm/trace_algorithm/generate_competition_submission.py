@@ -31,3 +31,5 @@ if __name__ == '__main__':
         )
 
     write_json_file(file_path=TRACE_ALGORITHM_SUBMISSION_PATH, data=predictions)
+    print(f'Predictions saved to {TRACE_ALGORITHM_SUBMISSION_PATH}')
+a
