@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import List
+from typing import List, Optional
 
 
 @dataclass
@@ -25,9 +25,8 @@ class Swipe:
     user_id: int                    # ID of user who generated swipe.
     device_type: str                # pc/mobile/tablet
     trace: List[TracePoint]         # List of TracePoint objects.
-    target_text: str                # Word user intended to swipe.
-    target_kis: str                 # Target key-id-sequence e.g. if target_text='hello' then target_kis='3246'.
-    trace_matches_text: bool        # Whether trace sufficiently matches text.
+    target_text: Optional[str]                # Word user intended to swipe.
+    target_kis: Optional[str]                 # Target key-id-sequence e.g. if target_text='hello' then target_kis='3246'.
 
     def __repr__(self):
-        return f'Swipe(target_text={self.target_text}, trace_matches_text={self.trace_matches_text})'
+        return f'Swipe(target_text={self.target_text})'

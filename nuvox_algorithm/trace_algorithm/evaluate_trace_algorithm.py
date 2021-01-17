@@ -3,7 +3,7 @@ from typing import Dict, List
 import numpy as np
 from tqdm import tqdm
 
-from nuvox_algorithm.trace_algorithm.utils.load_dataset import load_dataset
+from nuvox_algorithm.trace_algorithm.utils.load_dataset import _load_dataset
 from nuvox_algorithm.trace_algorithm.trace_algorithm import TraceAlgorithm
 
 
@@ -24,7 +24,7 @@ if __name__ == '__main__':
     so that you do not evaluate on swipes that were used during training.
     """
     # Load dataset of Swipes from data dump JSON file.
-    swipes = load_dataset(remove_inaccurate_swipes=True)
+    swipes = _load_dataset(remove_inaccurate_swipes=True)
 
     # Instantiate your TraceAlgorithm here.
     trace_algorithm = TraceAlgorithm()

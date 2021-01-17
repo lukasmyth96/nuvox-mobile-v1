@@ -2,7 +2,7 @@ from tqdm import tqdm
 
 from definition import TRACE_ALGORITHM_SUBMISSION_PATH
 from nuvox_algorithm.utils.io_funcs import write_json_file
-from nuvox_algorithm.trace_algorithm.utils import load_dataset
+from nuvox_algorithm.trace_algorithm.utils import _load_dataset
 from nuvox_algorithm.trace_algorithm.trace_algorithm import TraceAlgorithm
 
 
@@ -13,7 +13,7 @@ if __name__ == '__main__':
     you can then upload on the nuvox website.
     """
     # Load dataset of Swipes from data dump JSON file.
-    swipes = load_dataset(remove_inaccurate_swipes=True)
+    swipes = _load_dataset(remove_inaccurate_swipes=True)
 
     # Instantiate your TraceAlgorithm here.
     trace_algorithm = TraceAlgorithm()
