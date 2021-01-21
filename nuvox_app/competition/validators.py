@@ -3,6 +3,7 @@ from typing import List
 from django.core.exceptions import ValidationError
 import numpy as np
 
+from nuvox_algorithm.trace_algorithm.utils import load_test_set
 from keyboard.models import DataCollectionSwipe, DatasetSplit
 
 
@@ -22,10 +23,13 @@ def validate_submission_predictions(predictions: List[dict]):
     3. Each "id" corresponds to a swipe that has "dataset_split=test"
     4. the sum of predicted probabilities for a given swipe is 1.0 (within floating point tolerance).
     5. Each KIS is a valid string containing characters 1-9 only, no spaces and no adjacent duplicates.
+    6. The set of swipe "id"s matches the set in the local 'test.json' file. This ensure that people
+    submit predictions on the full test set.
     """
     if not isinstance(predictions, list):
         raise ValidationError('Predictions must be a list.')
 
+    swipe_ids_in_submission = []
     for swipe_prediction_dict in predictions:
 
         try:
@@ -36,6 +40,8 @@ def validate_submission_predictions(predictions: List[dict]):
 
         if not isinstance(swipe_id, int):
             raise ValidationError(f'Field "id" must contain integer but found {type(swipe_id).__name__}: {swipe_id}')
+
+        swipe_ids_in_submission.append(swipe_id)
 
         try:
             swipe = DataCollectionSwipe.objects.get(pk=swipe_id)
@@ -68,3 +74,8 @@ def validate_submission_predictions(predictions: List[dict]):
                 raise ValidationError(f'All values for individual prediction objects must be a predicted probability'
                                       f' of type float but found value: {predicted_prob} of type {type(predicted_prob).__name__}'
                                       f' for swipe with id: {swipe_id}.')
+
+    expected_test_swipes = load_test_set()
+    if not set(swipe_ids_in_submission) == {swipe.id for swipe in expected_test_swipes}:
+        raise ValidationError('The set of swipe ids in your submission does not match the expected'
+                              'set of swipe ids in the test set!')

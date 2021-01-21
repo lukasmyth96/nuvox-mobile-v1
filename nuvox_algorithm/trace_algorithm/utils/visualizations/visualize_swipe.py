@@ -74,7 +74,7 @@ def animate_swipe(swipe: Swipe, repeat: Optional[bool] = True):
 
 if __name__ == '__main__':
     """Example usage."""
-    from nuvox_algorithm.trace_algorithm import _load_dataset
+    from nuvox_algorithm.trace_algorithm.utils import load_train_set
 
-    swipes = _load_dataset()
+    swipes = load_train_set()
     animate_swipe(swipes[0])
