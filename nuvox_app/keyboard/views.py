@@ -13,6 +13,10 @@ from keyboard.serializers import DataCollectionSwipeSerializer
 from keyboard.validators import trace_matches_target_text
 
 
+def home(request):
+    return render(request=request, template_name='home.html')
+
+
 @login_required()
 def keyboard(request):
     context = {'is_mobile': request.user_agent.is_mobile}

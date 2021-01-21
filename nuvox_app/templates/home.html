@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_filters %}
+
+{% block head %}
+    <style>
+        .flex-container {
+            display: flex;
+            flex-flow: column;
+            height: 50vh;
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+        }
+    </style>
+
+{% endblock head %}
+
+{% block content %}
+    <div>
+        <h1>Welcome to the nuvox</h1>
+        <ul class="flex-container">
+            <li>
+                 <h3>Click <a href="{% url 'competition' %}">here</a> to view the nuvox algorithm competition page.</h3>
+            </li>
+            <li>
+                 <h3>Click <a href="{% url 'keyboard' %}">here</a> to play my data collection game :)</h3>
+            </li>
+        </ul>
+    </div>
+{% endblock content %}
