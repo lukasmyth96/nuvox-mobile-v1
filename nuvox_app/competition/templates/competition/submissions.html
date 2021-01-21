@@ -33,6 +33,12 @@
 {% block content %}
     <div style="text-align: center; margin-top: 10%">
         <h1>Competition Leaderboard</h1>
+        {% if users_best_rank and users_best_score %}
+            <h2>You're currently ranked {{ users_best_rank }} with a score of {{ users_best_score }}</h2>
+        {% else %}
+            <h2><a>Click here to enter the competition</a></h2>
+        {% endif %}
+        <h2></h2>
         <table>
             <tr>
                 <th>Username</th>
@@ -42,7 +48,7 @@
             {% for username, accuracy in ranked_username_accuracy_tuples %}
                 <tr>
                     <td>{{ username }}</td>
-                    <td>{{ accuracy|floatformat:3 }}</td>
+                    <td>{{ accuracy }}</td>
                     <td>{{ forloop.counter }}</td>
                 </tr>
             {% endfor %}

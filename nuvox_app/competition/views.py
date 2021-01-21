@@ -17,10 +17,19 @@ def competition(request):
 def submissions(request):
     """Submissions leaderboard."""
     all_submissions = Submission.objects.all()
+
     username_accuracy_tuples = [(submission.user.username, submission.top1_accuracy) for submission in all_submissions]
     ranked_username_accuracy_tuples = sorted(username_accuracy_tuples, key=lambda i: i[1], reverse=True)
+    users_best_score = None
+    users_best_rank = None
+    for idx, (username, score) in enumerate(ranked_username_accuracy_tuples):
+        if username == request.user.username:
+            users_best_rank = idx + 1
+            users_best_score = score
     context = {
-        'ranked_username_accuracy_tuples': ranked_username_accuracy_tuples
+        'ranked_username_accuracy_tuples': [(username, f'{score:.1%}') for username, score in ranked_username_accuracy_tuples],
+        'users_best_rank': users_best_rank,
+        'users_best_score': f'{users_best_score:.1%}'
     }
     return render(request, template_name='competition/submissions.html', context=context)
 
