@@ -34,7 +34,7 @@ class DataCollectionSwipeViewSet(viewsets.ModelViewSet):
     queryset = DataCollectionSwipe.objects.all()
     serializer_class = DataCollectionSwipeSerializer
     http_method_names = ['post']
-    # permission_classes = [IsAuthenticated]  # TODO uncomment after testing
+    permission_classes = [IsAuthenticated]
 
     def perform_create(self, serializer):
         """Add additional fields to serializer before saving."""

@@ -11,7 +11,7 @@ class GameViewSet(viewsets.ModelViewSet):
     queryset = Game.objects.all()
     serializer_class = GameSerializer
     http_method_names = ['get', 'post']
-    # permission_classes = [IsAuthenticated]  # TODO uncomment after testing
+    permission_classes = [IsAuthenticated]
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
