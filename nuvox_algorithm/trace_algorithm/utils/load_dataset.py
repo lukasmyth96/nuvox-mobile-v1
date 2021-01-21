@@ -11,15 +11,32 @@ from nuvox_algorithm.trace_algorithm.utils.download_dataset import (
 )
 
 
-def load_train_set() -> List[Swipe]:
-    if not os.path.exists(TRACE_ALGORITHM_DATASET_TRAIN_PATH):
+def load_train_set(force_download: Optional[bool] = False) -> List[Swipe]:
+    """Loads competition training set from local JSON file
+    and returns list of convenient Swipe objects.
+
+    Notes
+    ------
+    - Data will be downloaded from GDrive if not already downloaded or
+    if 'force_download' is True.
+    """
+    if force_download or not os.path.exists(TRACE_ALGORITHM_DATASET_TRAIN_PATH):
         download_trace_algorithm_train_set()
 
     return _load_dataset(file_path=TRACE_ALGORITHM_DATASET_TRAIN_PATH)
 
 
-def load_test_set() -> List[Swipe]:
-    if not os.path.exists(TRACE_ALGORITHM_DATASET_TEST_PATH):
+def load_test_set(force_download: Optional[bool] = False) -> List[Swipe]:
+    """Loads competition test set from local JSON file
+    and returns list of convenient Swipe objects.
+
+    Notes
+    ------
+    - Data will be downloaded from GDrive if not already downloaded or
+    if 'force_download' is True.
+    - 'target_text' field of will be 'None' for all test set items.
+    """
+    if force_download or not os.path.exists(TRACE_ALGORITHM_DATASET_TEST_PATH):
         download_trace_algorithm_test_set()
 
     return _load_dataset(file_path=TRACE_ALGORITHM_DATASET_TEST_PATH)
@@ -32,15 +49,15 @@ def _load_dataset(file_path: str) -> List[Swipe]:
     json_data = read_json_file(file_path)
     swipes = []
     for swipe_dict in json_data:
-        fields = swipe_dict['fields']
         swipe = Swipe(
             id=swipe_dict['id'],
-            user_id=fields['user_er'],
-            device_type=fields['device_type'],
+            user_id=swipe_dict['user_id'],
+            device_type=swipe_dict['device_type'],
             trace=[TracePoint(**trace_point, key_id=nuvox_keyboard.key_at_point(trace_point['x'], trace_point['y']).id)
-                   for trace_point in fields['trace']],
-            target_text=fields['target_text'],
-            target_kis=nuvox_keyboard.text_to_kis(text=fields['target_text'], skip_invalid_chars=True) if fields['target_text'] else None,
+                   for trace_point in swipe_dict['trace']],
+            target_text=swipe_dict['target_text'],
+            target_kis=nuvox_keyboard.text_to_kis(text=swipe_dict['target_text'], skip_invalid_chars=True)
+            if swipe_dict['target_text'] else None,
         )
 
         swipes.append(swipe)
