@@ -25,11 +25,11 @@ def submissions(request):
     for idx, (username, score) in enumerate(ranked_username_accuracy_tuples):
         if username == request.user.username:
             users_best_rank = idx + 1
-            users_best_score = score
+            users_best_score = f'{users_best_score:.1%}'
     context = {
         'ranked_username_accuracy_tuples': [(username, f'{score:.1%}') for username, score in ranked_username_accuracy_tuples],
         'users_best_rank': users_best_rank,
-        'users_best_score': f'{users_best_score:.1%}'
+        'users_best_score': users_best_score
     }
     return render(request, template_name='competition/submissions.html', context=context)
 

@@ -35,8 +35,6 @@
         <h1>Competition Leaderboard</h1>
         {% if users_best_rank and users_best_score %}
             <h2>You're currently ranked {{ users_best_rank }} with a score of {{ users_best_score }}</h2>
-        {% else %}
-            <h2><a>Click here to enter the competition</a></h2>
         {% endif %}
         <h2></h2>
         <table>
@@ -53,5 +51,6 @@
                 </tr>
             {% endfor %}
         </table>
+        <h4><a href="{% url 'submissions' %}">Click here to enter the competition</a></h4>
     </div>
 {% endblock content %}
