@@ -14,6 +14,7 @@ def download_trace_algorithm_train_set():
     Notes
     - File will be git ignored by default - do NOT attempt to commit it.
     """
+    print('Downloading competition train set...')
     _download_file_from_google_drive(
         gdrive_id=TRACE_ALGORITHM_DATASET_TRAIN_GDRIVE_ID,
         destination=TRACE_ALGORITHM_DATASET_TRAIN_PATH
@@ -26,6 +27,7 @@ def download_trace_algorithm_test_set():
     Notes
     - File will be git ignored by default - do NOT attempt to commit it.
     """
+    print('Downloading competition test set...')
     _download_file_from_google_drive(
         gdrive_id=TRACE_ALGORITHM_DATASET_TEST_GDRIVE_ID,
         destination=TRACE_ALGORITHM_DATASET_TEST_PATH
@@ -65,7 +67,3 @@ def save_response_content(response, destination):
         for chunk in response.iter_content(CHUNK_SIZE):
             if chunk:  # filter out keep-alive new chunks
                 f.write(chunk)
-
-
-if __name__ == "__main__":
-    _download_file_from_google_drive(TRACE_ALGORITHM_DATASET_TRAIN_GDRIVE_ID, TRACE_ALGORITHM_DATASET_PATH)
