@@ -20,13 +20,18 @@ class TracePoint:
 
 @dataclass
 class Swipe:
-    """Data class for a single Swipe."""
+    """Data class for a single Swipe.
+
+    Notes
+    -------
+    - 'target_text' and 'target_kis' fields will be 'None' for swipes in the test set.
+    """
     id: int                         # ID of swipe in database.
     user_id: int                    # ID of user who generated swipe.
     device_type: str                # pc/mobile/tablet
     trace: List[TracePoint]         # List of TracePoint objects.
-    target_text: Optional[str]                # Word user intended to swipe.
-    target_kis: Optional[str]                 # Target key-id-sequence e.g. if target_text='hello' then target_kis='3246'.
+    target_text: Optional[str]      # Word user intended to swipe.
+    target_kis: Optional[str]       # Target key-id-sequence e.g. if target_text='hello' then target_kis='3246'.
 
     def __repr__(self):
-        return f'Swipe(target_text={self.target_text})'
+        return f'Swipe(target_text={self.target_text}, target_kis={self.target_kis})'
