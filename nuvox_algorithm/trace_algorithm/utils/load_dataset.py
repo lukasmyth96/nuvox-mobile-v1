@@ -5,19 +5,22 @@ from definition import TRACE_ALGORITHM_DATASET_TRAIN_PATH, TRACE_ALGORITHM_DATAS
 from nuvox_algorithm.core import nuvox_keyboard
 from nuvox_algorithm.utils.io_funcs import read_json_file
 from nuvox_algorithm.trace_algorithm.swipe import Swipe, TracePoint
-from nuvox_algorithm.trace_algorithm.utils import download_trace_algorithm_dataset
+from nuvox_algorithm.trace_algorithm.utils.download_dataset import (
+    download_trace_algorithm_train_set,
+    download_trace_algorithm_test_set
+)
 
 
 def load_train_set() -> List[Swipe]:
     if not os.path.exists(TRACE_ALGORITHM_DATASET_TRAIN_PATH):
-        download_trace_algorithm_dataset()
+        download_trace_algorithm_train_set()
 
     return _load_dataset(file_path=TRACE_ALGORITHM_DATASET_TRAIN_PATH)
 
 
 def load_test_set() -> List[Swipe]:
     if not os.path.exists(TRACE_ALGORITHM_DATASET_TEST_PATH):
-        download_trace_algorithm_dataset()
+        download_trace_algorithm_test_set()
 
     return _load_dataset(file_path=TRACE_ALGORITHM_DATASET_TEST_PATH)
 

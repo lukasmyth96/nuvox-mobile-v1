@@ -1,19 +1,38 @@
 import requests
 
-from definition import TRACE_ALGORITHM_DATASET_GDRIVE_ID, TRACE_ALGORITHM_DATASET_PATH
+from definition import (
+    TRACE_ALGORITHM_DATASET_TRAIN_GDRIVE_ID,
+    TRACE_ALGORITHM_DATASET_TEST_GDRIVE_ID,
+    TRACE_ALGORITHM_DATASET_TRAIN_PATH,
+    TRACE_ALGORITHM_DATASET_TEST_PATH
+)
 
 
-def download_trace_algorithm_dataset():
-    """Downloads trace algorithm dataset (JSON file) and
-    saves to file.
+def download_trace_algorithm_train_set():
+    """Downloads trace algorithm dataset training set (JSON file).
 
     Notes
     - File will be git ignored by default - do NOT attempt to commit it.
     """
-    download_file_from_google_drive(gdrive_id=TRACE_ALGORITHM_DATASET_GDRIVE_ID, destination=TRACE_ALGORITHM_DATASET_PATH)
+    _download_file_from_google_drive(
+        gdrive_id=TRACE_ALGORITHM_DATASET_TRAIN_GDRIVE_ID,
+        destination=TRACE_ALGORITHM_DATASET_TRAIN_PATH
+    )
 
 
-def download_file_from_google_drive(gdrive_id: str, destination: str):
+def download_trace_algorithm_test_set():
+    """Downloads trace algorithm dataset training set (JSON file).
+
+    Notes
+    - File will be git ignored by default - do NOT attempt to commit it.
+    """
+    _download_file_from_google_drive(
+        gdrive_id=TRACE_ALGORITHM_DATASET_TEST_GDRIVE_ID,
+        destination=TRACE_ALGORITHM_DATASET_TEST_PATH
+    )
+
+
+def _download_file_from_google_drive(gdrive_id: str, destination: str):
     """Downloads publicly accessible file from Google Drive
     and saves contents to destination path."""
 
@@ -49,4 +68,4 @@ def save_response_content(response, destination):
 
 
 if __name__ == "__main__":
-    download_file_from_google_drive(TRACE_ALGORITHM_DATASET_GDRIVE_ID, TRACE_ALGORITHM_DATASET_PATH)
+    _download_file_from_google_drive(TRACE_ALGORITHM_DATASET_TRAIN_GDRIVE_ID, TRACE_ALGORITHM_DATASET_PATH)
