@@ -14,8 +14,8 @@
             {{ form|crispy }}
         </fieldset>
         <div style="text-align: center">
-            <button class="btn btn-primary btn-lg" type="submit">Submit</button>
+            <button style="margin-bottom: 25px" class="btn btn-primary btn-lg" type="submit">Submit</button>
+            <h4><a href="{% url 'submissions' %}">View Competition Leaderboard</a></h4>
         </div>
-
     </form>
 {% endblock content %}

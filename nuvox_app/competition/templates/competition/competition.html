@@ -3,10 +3,33 @@
 {% load crispy_forms_filters %}
 
 {% block head %}
+    <style>
+        .flex-container {
+            display: flex;
+            flex-flow: column;
+            height: 50vh;
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+        }
+    </style>
 
 {% endblock head %}
 
 {% block content %}
-    <h1>This will be competition home page</h1>
+    <div>
+        <h1>Welcome to the nuvox algorithm challenge!</h1>
+        <ul class="flex-container">
+            <li>
+                 <h3>Click <a href="https://github.com/lukasmyth96/nuvox-mobile"
+                              target="_blank">here</a> to read about the competition rules and guidelines.</h3>
+            </li>
+            <li>
+                 <h3>Click <a href="{% url 'submit' %}">here</a> to enter the competition.</h3>
+            </li>
+            <li>
+                 <h3>Click <a href="{% url 'submissions' %}">here</a> to view the leaderboard.</h3>
+            </li>
+        </ul>
+    </div>
 {% endblock content %}
 
