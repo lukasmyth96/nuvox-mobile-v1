@@ -2,7 +2,7 @@ Django >= 3.1.4
 django-crispy-forms >= 1.10.0
 django-user-agents >= 0.4.0
 djangorestframework >= 3.12.2
+english-words==1.0.3
 matplotlib == 3.3.3
 psycopg2==2.8.6
-wordfreq
 flake8

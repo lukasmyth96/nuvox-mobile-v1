@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django_user_agents.utils import get_user_agent
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
-from wordfreq import top_n_list
+from english_words import english_words_lower_alpha_set
 
 from keyboard.models import DataCollectionSwipe, DeviceType
 from keyboard.serializers import DataCollectionSwipeSerializer
@@ -25,7 +25,7 @@ def keyboard(request):
 
 @require_http_methods(['GET'])
 def random_word(request):
-    word_list = [word for word in top_n_list('en', 1000) if word.isalpha()]
+    word_list = list(english_words_lower_alpha_set)
     word = random.choice(word_list)
     return JsonResponse({'word': word})
 
