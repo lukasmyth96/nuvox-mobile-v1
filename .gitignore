@@ -133,3 +133,8 @@ nuvox_algorithm/trace_algorithm/dataset.json
 train.json
 test.json
 submission.json
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
