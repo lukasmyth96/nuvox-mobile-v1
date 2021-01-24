@@ -7,3 +7,5 @@ matplotlib == 3.3.3
 psycopg2==2.8.6
 flake8
 requests
+tqdm
+
