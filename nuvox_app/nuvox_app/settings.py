@@ -26,8 +26,8 @@ sys.path.append(str(REPO_DIR))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv('SECRET_KEY', default='development-secret-key')
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+APP_ENV = os.getenv('APP_ENV', default='local')
+
 
 ALLOWED_HOSTS = ['192.168.1.193', 'localhost', '127.0.0.1', 'nuvox-mobile-prod.eu-west-2.elasticbeanstalk.com']
 
@@ -86,7 +86,16 @@ WSGI_APPLICATION = 'nuvox_app.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-if os.getenv('RDS_DB_NAME'):
+if APP_ENV == 'local':
+    DEBUG = True
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
+else:
+    DEBUG = False
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -95,13 +104,6 @@ if os.getenv('RDS_DB_NAME'):
             'PASSWORD': os.environ['RDS_PASSWORD'],
             'HOST': os.environ['RDS_HOSTNAME'],
             'PORT': os.environ['RDS_PORT'],
-        }
-    }
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
         }
     }
 
