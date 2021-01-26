@@ -24,7 +24,7 @@ sys.path.append(str(REPO_DIR))
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'puil)8nic9u-3u)m$5u6s=d11x@q5$#u&@_y7i2#^+=qrbjhly'
+SECRET_KEY = os.getenv('SECRET_KEY', default='development-secret-key')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
