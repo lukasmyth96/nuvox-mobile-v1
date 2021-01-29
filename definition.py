@@ -12,4 +12,4 @@ TRACE_ALGORITHM_DATASET_TEST_PATH = os.path.join(REPO_ROOT_DIR, 'test.json')
 
 TRACE_ALGORITHM_SUBMISSION_PATH = os.path.join(REPO_ROOT_DIR, 'submission.json')
 
-KEYBOARD_IMAGE_PATH = os.path.join(REPO_ROOT_DIR, 'nuvox_app', 'keyboard', 'static', 'keyboard', 'assets', 'nuvox_keyboard_img.png')
+KEYBOARD_IMAGE_PATH = os.path.join(REPO_ROOT_DIR, 'nuvox_app', 'keyboard', 'www', 'keyboard', 'assets', 'nuvox_keyboard_img.png')
