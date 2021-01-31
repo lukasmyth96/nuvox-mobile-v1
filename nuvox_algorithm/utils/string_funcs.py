@@ -18,6 +18,6 @@ def all_char_subsequences(a_str: str) -> List[str]:
     Examples
     --------
     - 'aba' --> ['a', 'b', 'a', 'ab', 'aa', 'ba', 'aba']
-    - 'abc' --> ['a', 'b', 'c', 'ab', 'ba' 'bc', 'abc']
+    - 'abc' --> ['a', 'b', 'c', 'ab', 'ac', 'bc', 'abc']
     """
     return [''.join(char_subsequence) for char_subsequence in all_subsequences(list(a_str))]
