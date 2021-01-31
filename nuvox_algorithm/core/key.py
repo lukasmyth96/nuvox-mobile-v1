@@ -13,8 +13,8 @@ class Key:
     y1: float  # y coordinate of bottom right corner.
 
     def __post_init__(self):
-        assert 0.0 <= self.x0 <= self.x1 <= 1.0
-        assert 0.0 <= self.y0 <= self.y1 <= 1.0
+        assert 0.0 <= self.x0 <= self.x1 <= 1.0, 'Invalid key coordinates'
+        assert 0.0 <= self.y0 <= self.y1 <= 1.0, 'Invalid key coordinates'
         
     def contains(self, x: float, y: float) -> bool:
         """Returns True if (x, y) is within bounds of key."""
