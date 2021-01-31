@@ -1,17 +1,17 @@
-from typing import Iterable, List, Any
+from typing import Iterable, List, Any, Tuple
 
 import itertools
 
 
-def sequential_pairs(iterable: Iterable):
+def sequential_pairs(iterable: Iterable) -> List[Tuple[Any, Any]]:
     """Returns ordered pairs of adjacent items in iterable -
     i.e. s -> (s0, s1), (s1, s2)..."""
     i, j = itertools.tee(iterable)
     next(j, None)
-    return zip(i, j)
+    return list(zip(i, j))
 
 
-def filter_adjacent_duplicates(a_list: List):
+def filter_adjacent_duplicates(a_list: list) -> list:
     return [i for i, j in sequential_pairs(a_list + [not a_list[-1]]) if i != j]
 
 
