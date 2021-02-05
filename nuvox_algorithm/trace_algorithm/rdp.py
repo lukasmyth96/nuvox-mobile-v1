@@ -26,8 +26,14 @@ def point_line_distance(point, start, end):
 
 
 def rdp(points: List[Tuple[float, float]], epsilon: float) -> List[Tuple[float, float]]:
-    """Reduces a series of points to a simplified version that loses detail, but
-    maintains the general shape of the series.
+    """Ramer–Douglas–Peucker algorithm
+
+    Reduces a series of points to a simplified version that loses detail,
+     but maintains the general shape of the series.
+
+    Notes
+    ------
+    - Read more about the algorithm here: https://en.wikipedia.org/wiki/Ramer%E2%80%93Douglas%E2%80%93Peucker_algorithm
     """
     dmax = 0.0
     index = 0
