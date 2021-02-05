@@ -1,9 +1,13 @@
 from typing import Dict, List
 
+from matplotlib import pyplot as plt
 import numpy as np
 
+from nuvox_algorithm.core import nuvox_keyboard
 from nuvox_algorithm.trace_algorithm.swipe import TracePoint
 from nuvox_algorithm.utils.list_funcs import filter_adjacent_duplicates
+from nuvox_algorithm.trace_algorithm.rdp import rdp
+from nuvox_algorithm.trace_algorithm.angle import angle
 
 
 class TraceAlgorithm:
@@ -39,25 +43,55 @@ class TraceAlgorithm:
           thereby assigning a probability of 0.8 that the user intended the KIS
           1->2->3 and probability of 0.2 that the user only intended 1->3.
         """
-        # Below I have implemented an incredibly simple (though not very good) algorithm
-        # as a demonstration. It works by simply assuming that every key that was passed
-        # over during the swipe was intended as part of the word the user wanted to write.
 
-        # Get sequence of key_ids for each point in the trace e.g. ['1', '1', '1', '2', '3', '3'...]
-        sequence_of_key_ids_passed_over = [trace_point.key_id for trace_point in trace]
+        RDP_THRESHOLD = 0.01
+        ANGLE_THRESHOLD = np.pi * 0.22
 
-        # Filter out adjacent duplicates e.g. ['1', '1', '1', '2', '3', '3'...] --> ['1', '2', '3']
-        sequence_of_key_ids_passed_over = filter_adjacent_duplicates(sequence_of_key_ids_passed_over)
+        points = [(point.x, point.y) for point in trace]
 
-        # Return dictionary where this key-id-sequence is assigned a probability of 1.0 of being
-        # the intended KIS. Note we join the individual key ids into one string as the output expects.
+        rdp_points = rdp(points, RDP_THRESHOLD)
+
+        vectors = np.diff(np.array(rdp_points), axis=0)
+
+        angles = angle(vectors)
+
+        turning_point_indices = np.where(angles > ANGLE_THRESHOLD)[0] + 1
+        turning_points = [rdp_points[idx] for idx in turning_point_indices]
+        turning_point_key_ids = [nuvox_keyboard.key_at_point(x=p[0], y=p[1]).id for p in turning_points]
+        first_key_id = nuvox_keyboard.key_at_point(x=points[0][0], y=points[0][1]).id
+        last_key_id = nuvox_keyboard.key_at_point(x=points[-1][0], y=points[-1][1]).id
+        key_ids = [first_key_id, *turning_point_key_ids, last_key_id]
+        key_ids = filter_adjacent_duplicates(key_ids)
+        kis = ''.join(key_ids)
+
         kis_to_predicted_probability = {
-            ''.join(sequence_of_key_ids_passed_over): 1.0
+            kis: 1.0
         }
 
-        # The sum of predicted probabilities for each KIS must sum to 1.0.
-        assert np.isclose(sum(kis_to_predicted_probability.values()), 1.0, atol=1e-5)
+        # PLOTTING
+        fig = plt.figure()
+        ax = fig.add_subplot(111)
 
-        # If you're interested... this simple algorithm predicts the intended KIS ~10% of the time - hopfully you
-        # can do better...
+        x = np.array([p[0] for p in points])
+        y = np.array([p[1] for p in points])
+        rdp_x = np.array([p[0] for p in rdp_points])
+        rdp_y = np.array([p[1] for p in rdp_points])
+
+        ax.plot(x, y, 'b-', label='original path')
+        ax.plot(rdp_x, rdp_y, 'g--', label='simplified path')
+        ax.plot(rdp_x[turning_point_indices], rdp_y[turning_point_indices], 'ro', markersize=10, label='turning points')
+        ax.invert_yaxis()
+        plt.legend(loc='best')
+        plt.show()
+
         return kis_to_predicted_probability
+
+
+if __name__ == '__main__':
+    from nuvox_algorithm.trace_algorithm.utils import load_train_set
+    trace_algorithm = TraceAlgorithm()
+    swipes = load_train_set()
+    for swipe in swipes[:50]:
+        prediction = trace_algorithm.predict_intended_kis(swipe.trace)
+        print(f'Prediction for word: {swipe.target_text} with KIS {swipe.target_kis} is : {prediction.keys()}')
+
