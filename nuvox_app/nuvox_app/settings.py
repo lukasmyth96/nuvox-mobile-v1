@@ -149,7 +149,7 @@ STATIC_ROOT = 'static'
 
 AUTH_USER_MODEL = 'users.User'
 
-LOGIN_REDIRECT_URL = ''
+LOGIN_REDIRECT_URL = 'home'
 LOGIN_URL = 'login'
 LOGOUT_REDIRECT_URL = 'login'
 
