@@ -4,19 +4,21 @@
 Table of Contents
 =================
 
-   * [nuvox-mobile](#nuvox-mobile)
-      * [What is nuvox?](#what-is-nuvox)
-      * [What is nuvox-mobile?](#what-is-nuvox-mobile)
-      * [Repo Structure](#repo-structure)
-      * [Development Guide](#development-guide)
-         * [Installation](#installation)
-         * [Local Django Setup](#local-django-setup)
-      * [Trace Algorithm Competition](#trace-algorithm-competition)
-         * [What is a 'trace algorithm'?](#what-is-a-trace-algorithm)
-         * [What's the challenge?](#whats-the-challenge)
-         * [Dataset](#dataset)
-         * [Algorithm Implementation](#algorithm-implementation)
-         * [Evaluation](#evaluation)
+
+  * [What is nuvox?](#what-is-nuvox)
+  * [What is nuvox-mobile?](#what-is-nuvox-mobile)
+  * [Project Structure](#project-structure)
+  * [Development Guide](#development-guide)
+     * [Requirements](#requirements)
+     * [Installation](#installation)
+     * [Local Django Setup](#local-django-setup)
+  * [Trace Algorithm Competition](#trace-algorithm-competition)
+     * [What is a 'trace algorithm'?](#what-is-a-trace-algorithm)
+     * [What's the challenge?](#whats-the-challenge)
+     * [Algorithm Implementation](#algorithm-implementation)
+     * [Dataset](#dataset)
+     * [Evaluation on Training Set](#evaluation-on-training-set)
+     * [Entering the Competition](#entering-the-competition)
 
 
 ## What is nuvox?
