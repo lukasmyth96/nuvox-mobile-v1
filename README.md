@@ -104,7 +104,7 @@ work in any way you like and may or may not use a machine learning model.
 - This function downloads the data from GDrive and parses it into a list of convenient 'Swipe' objects.
 - Each Swipe object in the dataset has the following attributes:
    - `trace: List[TracePoint]` is a list of each point in the trace. Each `TracePoint` object stores
-   the x, y and time (s) coordinates of that point.
+   the x, y and time (s) coordinates of that point as well as the ID of the key which that point belongs to.
    - `target_word: str` is the word that the user intended to write.
    - `target_kis: str` is the intended key-id-sequence - e.g. if the target_word was 'hello' then the target_kis would
    be '3246'. Note this sequence is a string rather than list so that it's hashable and can be used as key of dictionary.
@@ -124,6 +124,11 @@ This will generate a `submission.json` file which contains the predictions of yo
 2. Go to [http://nuvox-mobile-prod.eu-west-2.elasticbeanstalk.com/competition/](http://nuvox-mobile-prod.eu-west-2.elasticbeanstalk.com/competition/).
 3. Click the link to enter the competition - sign up if you haven't already.
 4. Copy and paste the entire contents of your `submission.json` file into the text box and submit.
+
+### Useful Functions
+- I have include a script `nuvox_algorithm/trace_algorithm/utils/visualizations/visualise_swipe.py` which
+you can run to produce an animation of a single swipe. Note you may need to install: `sudo apt-get install python3-tk` for
+this to work depending on your Python installation.  
 
 
 ***
