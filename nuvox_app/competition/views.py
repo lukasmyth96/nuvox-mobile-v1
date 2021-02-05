@@ -27,6 +27,7 @@ def submissions(request):
         if username == request.user.username:
             users_best_rank = idx + 1
             users_best_score = f'{score:.1%}'
+            break
     context = {
         'ranked_username_accuracy_tuples': [(username, f'{score:.1%}') for username, score in ranked_username_accuracy_tuples],
         'users_best_rank': ordinal(users_best_rank),

@@ -40,7 +40,7 @@ if __name__ == '__main__':
     _swipes = load_test_set()
 
     # Instantiate your TraceAlgorithm here.
-    _trace_algorithm = TraceAlgorithm()
+    _trace_algorithm = TraceAlgorithm(rdp_threshold=0.01, angle_threshold=0.55)
 
     main_generate_competition_submission(
         swipes=_swipes,

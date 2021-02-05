@@ -50,7 +50,7 @@ if __name__ == '__main__':
     _swipes = load_train_set()
 
     # Instantiate your TraceAlgorithm here.
-    _trace_algorithm = TraceAlgorithm()
+    _trace_algorithm = TraceAlgorithm(rdp_threshold=0.01, angle_threshold=0.55)
     _top1_acc, _top3_acc = main_evaluate_trace_algorithm(_swipes, _trace_algorithm)
 
     print(f'\nEvaluation Complete: top-1 accuracy: {_top1_acc:.2%} - top-3 accuracy: {_top3_acc:.2%}')

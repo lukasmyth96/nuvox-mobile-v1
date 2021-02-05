@@ -11,11 +11,12 @@ from nuvox_algorithm.trace_algorithm.angle import angle
 
 
 class TraceAlgorithm:
-    def __init__(self):
+    def __init__(self, rdp_threshold: float, angle_threshold: float):
         # The init method can be used to load a machine learning model or simply
         # set some configurations for your trace algorithm. You do not have to
         # use it if you do not need it.
-        pass
+        self.rdp_threshold = rdp_threshold
+        self.angle_threshold = angle_threshold
 
     def predict_intended_kis(self, trace: List[TracePoint]) -> Dict[str, float]:
         """This method receives a swipe trace (chronological list
@@ -44,18 +45,15 @@ class TraceAlgorithm:
           1->2->3 and probability of 0.2 that the user only intended 1->3.
         """
 
-        RDP_THRESHOLD = 0.01
-        ANGLE_THRESHOLD = np.pi * 0.22
-
         points = [(point.x, point.y) for point in trace]
 
-        rdp_points = rdp(points, RDP_THRESHOLD)
+        rdp_points = rdp(points, self.rdp_threshold)
 
         vectors = np.diff(np.array(rdp_points), axis=0)
 
         angles = angle(vectors)
 
-        turning_point_indices = np.where(angles > ANGLE_THRESHOLD)[0] + 1
+        turning_point_indices = np.where(angles > self.angle_threshold)[0] + 1
         turning_points = [rdp_points[idx] for idx in turning_point_indices]
         turning_point_key_ids = [nuvox_keyboard.key_at_point(x=p[0], y=p[1]).id for p in turning_points]
         first_key_id = nuvox_keyboard.key_at_point(x=points[0][0], y=points[0][1]).id
@@ -69,29 +67,29 @@ class TraceAlgorithm:
         }
 
         # PLOTTING
-        fig = plt.figure()
-        ax = fig.add_subplot(111)
-
-        x = np.array([p[0] for p in points])
-        y = np.array([p[1] for p in points])
-        rdp_x = np.array([p[0] for p in rdp_points])
-        rdp_y = np.array([p[1] for p in rdp_points])
-
-        ax.plot(x, y, 'b-', label='original path')
-        ax.plot(rdp_x, rdp_y, 'g--', label='simplified path')
-        ax.plot(rdp_x[turning_point_indices], rdp_y[turning_point_indices], 'ro', markersize=10, label='turning points')
-        ax.invert_yaxis()
-        plt.legend(loc='best')
-        plt.show()
+        # fig = plt.figure()
+        # ax = fig.add_subplot(111)
+        #
+        # x = np.array([p[0] for p in points])
+        # y = np.array([p[1] for p in points])
+        # rdp_x = np.array([p[0] for p in rdp_points])
+        # rdp_y = np.array([p[1] for p in rdp_points])
+        #
+        # ax.plot(x, y, 'b-', label='original path')
+        # ax.plot(rdp_x, rdp_y, 'g--', label='simplified path')
+        # ax.plot(rdp_x[turning_point_indices], rdp_y[turning_point_indices], 'ro', markersize=10, label='turning points')
+        # ax.invert_yaxis()
+        # plt.legend(loc='best')
+        # plt.show()
 
         return kis_to_predicted_probability
 
 
 if __name__ == '__main__':
     from nuvox_algorithm.trace_algorithm.utils import load_train_set
-    trace_algorithm = TraceAlgorithm()
+    trace_algorithm = TraceAlgorithm(rdp_threshold=0.01, angle_threshold=np.pi * 0.22)
     swipes = load_train_set()
-    for swipe in swipes[:50]:
+    for swipe in swipes[:10]:
         prediction = trace_algorithm.predict_intended_kis(swipe.trace)
         print(f'Prediction for word: {swipe.target_text} with KIS {swipe.target_kis} is : {prediction.keys()}')
 
