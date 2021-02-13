@@ -2,8 +2,9 @@ from typing import Dict, List, Tuple
 
 import numpy as np
 
-from nuvox_algorithm.trace_algorithm.utils.load_dataset import load_train_set
-from nuvox_algorithm.trace_algorithm import TraceAlgorithm, Swipe
+from nuvox_algorithm.core import Swipe
+from nuvox_algorithm.trace_algorithm import TraceAlgorithm
+from nuvox_algorithm.trace_algorithm.utils import load_train_set
 
 
 def ranked_key_id_sequences(kis_to_predicted_proba: Dict[str, float]) -> List[str]:

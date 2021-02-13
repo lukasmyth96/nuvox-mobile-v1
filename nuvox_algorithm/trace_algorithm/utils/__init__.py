@@ -2,4 +2,3 @@ from .download_dataset import download_trace_algorithm_train_set, download_trace
 from .load_dataset import load_train_set, load_test_set
 from .rdp import rdp
 from .angle import angle
-
