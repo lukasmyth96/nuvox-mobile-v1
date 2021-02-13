@@ -1,5 +1,6 @@
-from nuvox_algorithm.trace_algorithm import TraceAlgorithm, Swipe, TracePoint
-from nuvox_algorithm.trace_algorithm.evaluate_trace_algorithm import main_evaluate_trace_algorithm, ranked_key_id_sequences
+from nuvox_algorithm.core import   Swipe, TracePoint
+from nuvox_algorithm.trace_algorithm import TraceAlgorithm
+from nuvox_algorithm.trace_algorithm.scripts.evaluate_trace_algorithm import main_evaluate_trace_algorithm, ranked_key_id_sequences
 
 
 def test_ranked_key_id_sequences():
@@ -27,7 +28,7 @@ def test_main_evaluate_trace_algorithm():
         )
     ]
 
-    trace_algorithm = TraceAlgorithm()
+    trace_algorithm = TraceAlgorithm(rdp_threshold=0, angle_threshold=0)
 
     trace_algorithm.predict_intended_kis = lambda trace: {'3246': 1.0}
     assert main_evaluate_trace_algorithm(

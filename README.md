@@ -112,13 +112,13 @@ work in any way you like and may or may not use a machine learning model.
 
 ### Evaluation on Training Set
 - Whilst developing your trace algorithm you may want to evaluate its performance on the training set.
-- To do this run the script `nuvox_algorithm/trace_algorith/evaluate_trace_algorithm.py`.
+- To do this run the script `nuvox_algorithm/trace_algorithm/scripts/evaluate_trace_algorithm.py`.
 - The script will print the accuracy of your algorithm on the train set.
 
 
 ### Entering the Competition
 _Once you've implemented your algorithm follow these steps to enter the competition:_
-1. Run the script `nuvox_algorithm/trace_algorithm/generate_compeition_submission.py`.
+1. Run the script `nuvox_algorithm/trace_algorithm/scripts/generate_compeition_submission.py`.
 This will generate a `submission.json` file which contains the predictions of your algorithm
    on a separate test set where the labels have been removed.
 2. Go to [http://nuvox-mobile-prod.eu-west-2.elasticbeanstalk.com/competition/](http://nuvox-mobile-prod.eu-west-2.elasticbeanstalk.com/competition/).
@@ -126,7 +126,7 @@ This will generate a `submission.json` file which contains the predictions of yo
 4. Copy and paste the entire contents of your `submission.json` file into the text box and submit.
 
 ### Useful Functions
-- I have include a script `nuvox_algorithm/trace_algorithm/utils/visualizations/visualise_swipe.py` which
+- I have include a script `nuvox_algorithm/trace_algorithm/visualizations/visualise_swipe.py` which
 you can run to produce an animation of a single swipe. Note you may need to install: `sudo apt-get install python3-tk` for
 this to work depending on your Python installation.  
 

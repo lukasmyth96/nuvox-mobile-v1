@@ -8,7 +8,7 @@ import matplotlib.image as mpimg
 import numpy as np
 
 from definition import KEYBOARD_IMAGE_PATH
-from nuvox_algorithm.trace_algorithm.swipe import Swipe
+from nuvox_algorithm.core import Swipe
 
 
 def plot_swipe(swipe: Swipe):

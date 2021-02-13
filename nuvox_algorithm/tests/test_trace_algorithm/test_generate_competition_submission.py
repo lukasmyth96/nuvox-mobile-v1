@@ -1,6 +1,7 @@
 from nuvox_algorithm.utils.io_funcs import read_json_file
-from nuvox_algorithm.trace_algorithm import TraceAlgorithm, Swipe, TracePoint
-from nuvox_algorithm.trace_algorithm.generate_competition_submission import main_generate_competition_submission
+from nuvox_algorithm.core import Swipe, TracePoint
+from nuvox_algorithm.trace_algorithm import TraceAlgorithm
+from nuvox_algorithm.trace_algorithm.scripts.generate_competition_submission import main_generate_competition_submission
 
 
 def test_main_generate_competition_submission(tmpdir):
@@ -20,7 +21,7 @@ def test_main_generate_competition_submission(tmpdir):
         )
     ]
 
-    trace_algorithm = TraceAlgorithm()
+    trace_algorithm = TraceAlgorithm(rdp_threshold=0, angle_threshold=0)
     trace_algorithm.predict_intended_kis = lambda trace: {'3246': 1.0}
 
     main_generate_competition_submission(

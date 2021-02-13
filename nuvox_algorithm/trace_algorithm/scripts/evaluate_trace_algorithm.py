@@ -1,10 +1,10 @@
 from typing import Dict, List, Tuple
 
 import numpy as np
-from tqdm import tqdm
 
-from nuvox_algorithm.trace_algorithm.utils.load_dataset import load_train_set
-from nuvox_algorithm.trace_algorithm import TraceAlgorithm, Swipe
+from nuvox_algorithm.core import Swipe
+from nuvox_algorithm.trace_algorithm import TraceAlgorithm
+from nuvox_algorithm.trace_algorithm.utils import load_train_set
 
 
 def ranked_key_id_sequences(kis_to_predicted_proba: Dict[str, float]) -> List[str]:
@@ -22,7 +22,7 @@ def main_evaluate_trace_algorithm(swipes: List[Swipe],
     top3_acc_list = []  # list of bools indicating whether true KIS was in top-3 predictions for each swipe.
 
     print(f'Evaluating your algorithm on {len(swipes)} swipes...')
-    for swipe in tqdm(swipes):
+    for swipe in swipes:
 
         kis_to_predicted_proba = trace_algorithm.predict_intended_kis(trace=swipe.trace)
         ranked_kis = ranked_key_id_sequences(kis_to_predicted_proba)
@@ -50,7 +50,7 @@ if __name__ == '__main__':
     _swipes = load_train_set()
 
     # Instantiate your TraceAlgorithm here.
-    _trace_algorithm = TraceAlgorithm()
+    _trace_algorithm = TraceAlgorithm(rdp_threshold=0.008, angle_threshold=0.485)
     _top1_acc, _top3_acc = main_evaluate_trace_algorithm(_swipes, _trace_algorithm)
 
     print(f'\nEvaluation Complete: top-1 accuracy: {_top1_acc:.2%} - top-3 accuracy: {_top3_acc:.2%}')

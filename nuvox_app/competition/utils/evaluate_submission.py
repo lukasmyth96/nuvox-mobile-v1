@@ -3,7 +3,7 @@ from typing import List, Tuple
 import numpy as np
 
 from nuvox_algorithm.core import nuvox_keyboard
-from nuvox_algorithm.trace_algorithm.evaluate_trace_algorithm import ranked_key_id_sequences
+from nuvox_algorithm.trace_algorithm.scripts.evaluate_trace_algorithm import ranked_key_id_sequences
 from keyboard.models import DataCollectionSwipe
 
 
