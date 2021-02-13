@@ -126,7 +126,7 @@ This will generate a `submission.json` file which contains the predictions of yo
 4. Copy and paste the entire contents of your `submission.json` file into the text box and submit.
 
 ### Useful Functions
-- I have include a script `nuvox_algorithm/trace_algorithm/utils/visualizations/visualise_swipe.py` which
+- I have include a script `nuvox_algorithm/trace_algorithm/visualizations/visualise_swipe.py` which
 you can run to produce an animation of a single swipe. Note you may need to install: `sudo apt-get install python3-tk` for
 this to work depending on your Python installation.  
 
