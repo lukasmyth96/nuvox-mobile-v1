@@ -11,6 +11,12 @@ class LanguageModel:
         self.tokenizer = AutoTokenizer.from_pretrained(self.model_name)
         self.model = AutoModelForCausalLM.from_pretrained(self.model_name)
 
+    @property
+    def vocab(self):
+        token_to_id = self.tokenizer.get_vocab()
+        vocab = list(token_to_id)
+        return vocab
+
     def predict_next_word(self, prompt: str) -> Dict[str, float]:
         token_ids = self.tokenizer.encode(text=prompt, return_tensors="pt")
         model_output = self.model(token_ids)
