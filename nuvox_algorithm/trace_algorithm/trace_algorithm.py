@@ -6,8 +6,8 @@ import numpy as np
 from nuvox_algorithm.core import nuvox_keyboard
 from nuvox_algorithm.trace_algorithm.swipe import TracePoint
 from nuvox_algorithm.utils.list_funcs import filter_adjacent_duplicates
-from nuvox_algorithm.trace_algorithm.rdp import rdp
-from nuvox_algorithm.trace_algorithm.angle import angle
+from nuvox_algorithm.trace_algorithm.utils.rdp import rdp
+from nuvox_algorithm.trace_algorithm.utils.angle import angle
 
 
 class TraceAlgorithm:
