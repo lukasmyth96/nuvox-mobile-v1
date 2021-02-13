@@ -2,9 +2,8 @@ import os
 from typing import List, Optional
 
 from definition import TRACE_ALGORITHM_DATASET_TRAIN_PATH, TRACE_ALGORITHM_DATASET_TEST_PATH
-from nuvox_algorithm.core import nuvox_keyboard
+from nuvox_algorithm.core import nuvox_keyboard, Swipe, TracePoint
 from nuvox_algorithm.utils.io_funcs import read_json_file
-from nuvox_algorithm.trace_algorithm.swipe import Swipe, TracePoint
 from nuvox_algorithm.trace_algorithm.utils.download_dataset import (
     download_trace_algorithm_train_set,
     download_trace_algorithm_test_set
