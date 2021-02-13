@@ -112,13 +112,13 @@ work in any way you like and may or may not use a machine learning model.
 
 ### Evaluation on Training Set
 - Whilst developing your trace algorithm you may want to evaluate its performance on the training set.
-- To do this run the script `nuvox_algorithm/trace_algorith/evaluate_trace_algorithm.py`.
+- To do this run the script `nuvox_algorithm/trace_algorithm/scripts/evaluate_trace_algorithm.py`.
 - The script will print the accuracy of your algorithm on the train set.
 
 
 ### Entering the Competition
 _Once you've implemented your algorithm follow these steps to enter the competition:_
-1. Run the script `nuvox_algorithm/trace_algorithm/generate_compeition_submission.py`.
+1. Run the script `nuvox_algorithm/trace_algorithm/scripts/generate_compeition_submission.py`.
 This will generate a `submission.json` file which contains the predictions of your algorithm
    on a separate test set where the labels have been removed.
 2. Go to [http://nuvox-mobile-prod.eu-west-2.elasticbeanstalk.com/competition/](http://nuvox-mobile-prod.eu-west-2.elasticbeanstalk.com/competition/).

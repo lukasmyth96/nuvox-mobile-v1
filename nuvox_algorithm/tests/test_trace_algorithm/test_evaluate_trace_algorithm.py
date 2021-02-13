@@ -1,5 +1,5 @@
 from nuvox_algorithm.trace_algorithm import TraceAlgorithm, Swipe, TracePoint
-from nuvox_algorithm.trace_algorithm.evaluate_trace_algorithm import main_evaluate_trace_algorithm, ranked_key_id_sequences
+from nuvox_algorithm.trace_algorithm.scripts.evaluate_trace_algorithm import main_evaluate_trace_algorithm, ranked_key_id_sequences
 
 
 def test_ranked_key_id_sequences():

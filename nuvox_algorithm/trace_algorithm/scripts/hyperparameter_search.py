@@ -1,11 +1,8 @@
-from typing import Dict, List, Tuple
-
 import numpy as np
-from tqdm import tqdm
 
 from nuvox_algorithm.trace_algorithm.utils.load_dataset import load_train_set
-from nuvox_algorithm.trace_algorithm import TraceAlgorithm, Swipe
-from nuvox_algorithm.trace_algorithm.evaluate_trace_algorithm import main_evaluate_trace_algorithm
+from nuvox_algorithm.trace_algorithm import TraceAlgorithm
+from nuvox_algorithm.trace_algorithm.scripts.evaluate_trace_algorithm import main_evaluate_trace_algorithm
 
 
 

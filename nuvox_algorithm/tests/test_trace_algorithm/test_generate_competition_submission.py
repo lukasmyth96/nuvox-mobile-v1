@@ -1,6 +1,6 @@
 from nuvox_algorithm.utils.io_funcs import read_json_file
 from nuvox_algorithm.trace_algorithm import TraceAlgorithm, Swipe, TracePoint
-from nuvox_algorithm.trace_algorithm.generate_competition_submission import main_generate_competition_submission
+from nuvox_algorithm.trace_algorithm.scripts.generate_competition_submission import main_generate_competition_submission
 
 
 def test_main_generate_competition_submission(tmpdir):
