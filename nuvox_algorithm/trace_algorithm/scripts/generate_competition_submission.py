@@ -2,10 +2,11 @@ from typing import List
 
 from tqdm import tqdm
 
-from definition import TRACE_ALGORITHM_SUBMISSION_PATH
+from definition import TRACE_ALGORITHM_SUBMISSION_PATH, NUVOX_WEBSITE_URL
+from nuvox_algorithm.core import Swipe
 from nuvox_algorithm.utils.io_funcs import write_json_file
 from nuvox_algorithm.trace_algorithm.utils import load_test_set
-from nuvox_algorithm.trace_algorithm import TraceAlgorithm, Swipe
+from nuvox_algorithm.trace_algorithm import TraceAlgorithm
 
 
 def main_generate_competition_submission(swipes: List[Swipe],
@@ -48,4 +49,6 @@ if __name__ == '__main__':
         output_path=TRACE_ALGORITHM_SUBMISSION_PATH
     )
 
-    print(f'Predictions saved to {TRACE_ALGORITHM_SUBMISSION_PATH}')
+    print(f'Submission file saved to {TRACE_ALGORITHM_SUBMISSION_PATH}')
+    print(f'You can upload this submission file on the nuvox website to '
+          f'enter the trace algorithm competition:\n {NUVOX_WEBSITE_URL}')
