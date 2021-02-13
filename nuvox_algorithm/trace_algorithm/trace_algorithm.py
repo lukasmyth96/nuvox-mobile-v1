@@ -75,6 +75,9 @@ class TraceAlgorithm:
         # Filter out adjacent duplicates i.e. [1, 2, 2, 3] --> [1, 2, 3]
         key_ids = filter_adjacent_duplicates(key_ids)
 
+        # Filter out '5' as this key contains no characters so can't have been intended.
+        key_ids = [key_id for key_id in key_ids if key_id != '5']
+
         # Convert list to string i.e. [1, 2, 3] --> '123'
         kis = ''.join(key_ids)
 
@@ -83,30 +86,21 @@ class TraceAlgorithm:
         }
 
         # Uncomment this to plot the path and turning points...
-        # fig = plt.figure()
-        # ax = fig.add_subplot(111)
-        #
-        # x = np.array([p[0] for p in points])
-        # y = np.array([p[1] for p in points])
-        # rdp_x = np.array([p[0] for p in rdp_points])
-        # rdp_y = np.array([p[1] for p in rdp_points])
-        #
-        # ax.plot(x, y, 'b-', label='original path')
-        # ax.plot(rdp_x, rdp_y, 'g--', label='simplified path')
-        # ax.plot(rdp_x[turning_point_indices], rdp_y[turning_point_indices], 'ro', markersize=10, label='turning points')
-        # ax.invert_yaxis()
-        # plt.legend(loc='best')
-        # plt.show()
+        fig = plt.figure()
+        ax = fig.add_subplot(111)
+
+        x = np.array([p[0] for p in points])
+        y = np.array([p[1] for p in points])
+        rdp_x = np.array([p[0] for p in rdp_points])
+        rdp_y = np.array([p[1] for p in rdp_points])
+
+        ax.set_xlim(0, 1)
+        ax.set_ylim(0, 1)
+        ax.plot(x, y, 'b-', label='original path')
+        ax.plot(rdp_x, rdp_y, 'g--', label='simplified path')
+        ax.plot(rdp_x[turning_point_indices], rdp_y[turning_point_indices], 'ro', markersize=10, label='turning points')
+        ax.invert_yaxis()
+        plt.legend(loc='best')
+        plt.show()
 
         return kis_to_predicted_probability
-
-
-if __name__ == '__main__':
-    """Debugging script."""
-    from nuvox_algorithm.trace_algorithm.utils import load_train_set
-    trace_algorithm = TraceAlgorithm(rdp_threshold=0.01, angle_threshold=np.pi * 0.22)
-    swipes = load_train_set()
-    for swipe in swipes[:10]:
-        prediction = trace_algorithm.predict_intended_kis(swipe.trace)
-        print(f'Prediction for word: {swipe.target_text} with KIS {swipe.target_kis} is : {prediction.keys()}')
-
