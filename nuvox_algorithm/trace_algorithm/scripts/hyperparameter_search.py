@@ -7,15 +7,8 @@ from nuvox_algorithm.trace_algorithm.scripts.evaluate_trace_algorithm import mai
 
 
 if __name__ == '__main__':
-    """
-    This script evaluates your trace algorithm on a dataset of collected swipes stored in
-    a JSON file. Once complete it will print the top-1 and top-3 accuracy of your algorithm.
-
-    Notes
-    ------
-    - If your trace algorithm uses a machine learning model then you should edit this script
-    so that you do not evaluate on swipes that were used during training.
-    """
+    """This script performs a grid search to find the optimal combination
+    of rdp_threshold and angle_threshold."""
     # Load dataset of Swipes from data dump JSON file.
     _swipes = load_train_set()
 
