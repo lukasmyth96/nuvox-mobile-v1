@@ -7,7 +7,7 @@ from tqdm import tqdm
 
 from nuvox_algorithm.utils.io_funcs import read_text_file
 from nuvox_algorithm.core import nuvox_keyboard
-from nuvox_algorithm.language_model.evaluation.filter_predictions_by_key_id_sequence import filter_predictions_by_key_id_sequence
+from language_model.scripts.evaluation.filter_predictions_by_key_id_sequence import filter_predictions_by_key_id_sequence
 
 if __name__ == '__main__':
     """
