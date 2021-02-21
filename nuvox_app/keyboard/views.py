@@ -18,7 +18,7 @@ def home(request):
 
 
 @login_required()
-def keyboard(request):
+def game(request):
     context = {'is_mobile': request.user_agent.is_mobile}
     return render(request=request, template_name='keyboard/game.html', context=context)
 
