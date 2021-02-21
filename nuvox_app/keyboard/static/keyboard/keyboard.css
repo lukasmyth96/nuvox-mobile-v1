@@ -1,4 +1,12 @@
-#top-section-container{
+.top-section-container{
     height: 20vh;
-    padding-top: 10vh;
+}
+
+#text-box {
+    width: 100%;
+}
+
+.suggestion-btn {
+    width: 100%;
+    height: 100%;
 }
