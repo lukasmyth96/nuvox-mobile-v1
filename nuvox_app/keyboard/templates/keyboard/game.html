@@ -37,11 +37,7 @@
         </div>
       </div>
     </div>
-    <div id="sketchpadapp">
-        <canvas id="sketchpad"
-                style="background-image: url({% static "keyboard/assets/nuvox_keyboard_img.png" %})">
-        </canvas>
-    </div>
+    {% include "keyboard/_keypad.html" %}
 
     {% include "keyboard/_game_over_modal.html" %}
 {% endblock %}
