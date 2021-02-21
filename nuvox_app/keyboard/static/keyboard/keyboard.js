@@ -36,6 +36,9 @@ function getPrediction(prompt, trace) {
         }
     ).done(function (data) {
         console.log(data.predicted_words);
+        const textBox = document.getElementById('text-box');
+        textBox.value += ` ${data.predicted_words[0]} `;  // pre and post spaces are important!
+
     }).fail(function (jqXHR, exception) {
             alert('Oops something went wrong :(');
         }
