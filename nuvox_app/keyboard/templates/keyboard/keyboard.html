@@ -5,6 +5,7 @@
 {% block head %}
     <link rel="stylesheet" type="text/css" href="{% static 'keyboard/keyboard.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'keyboard/keypad.css' %}">
+    <script src={% static 'keyboard/keyboard.js' %}></script>
     <script src={% static 'keyboard/keypad.js' %}></script>
     {{ is_mobile|json_script:"is_mobile" }}
     <script>

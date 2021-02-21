@@ -8,11 +8,14 @@ from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
 from english_words import english_words_lower_alpha_set
 
-from keyboard.models import DataCollectionSwipe, DeviceType
-from keyboard.serializers import DataCollectionSwipeSerializer
-from keyboard.validators import trace_matches_target_text
+from keyboard.apps import KeyboardConfig
 
 @login_required()
 def keyboard(request):
     context = {'is_mobile': request.user_agent.is_mobile}
     return render(request=request, template_name='keyboard/keyboard.html', context=context)
+
+@login_required()
+def predict(request):
+    print('stop here')
+    return JsonResponse({'predicted_words': ['test1', 'test2']})
