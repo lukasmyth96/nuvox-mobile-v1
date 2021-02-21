@@ -1,5 +1,6 @@
 from typing import List, Dict
 
+from nuvox_algorithm.utils.dict_funcs import ranked_keys
 from nuvox_algorithm.core import nuvox_keyboard, TracePoint
 from nuvox_algorithm.language_model import LanguageModel
 from nuvox_algorithm.trace_algorithm import TraceAlgorithm
@@ -16,7 +17,7 @@ class NuvoxAlgorithm:
             for token in self.language_model.vocab
         }
 
-    def predict(self, prompt: str, trace: List[TracePoint]):
+    def predict(self, prompt: str, trace: List[TracePoint]) -> List[str]:
 
         # Language Model
         token_to_lang_model_pred_prob = self.language_model.predict_next_word(prompt=prompt)
@@ -34,7 +35,10 @@ class NuvoxAlgorithm:
             token_to_lang_model_pred_prob
         )
 
-        return token_to_joint_prob
+        top_n_words = ranked_keys(token_to_joint_prob)[:10]
+
+        return top_n_words
+
 
     def joint_prob(self,
                    token_to_trace_algo_prob: Dict[str, float],
@@ -55,7 +59,6 @@ if __name__ == '__main__':
     random.shuffle(_swipes)
     for swipe in _swipes:
         _prompt = input(f'Type suitable prompt for: "{swipe.target_text}": ')
-        token_to_joint_prob = _nuvox.predict(_prompt, swipe.trace)
-        top_5 = [k for k, v in sorted(token_to_joint_prob.items(), key=lambda item: item[1], reverse=True)[:5]]
+        top_n = _nuvox.predict(_prompt, swipe.trace)
         print(f'Correct: {swipe.target_text}\n'
-              f'Top-5: {" ".join(top_5)}\n')
+              f'Top-n: {" ".join(top_n)}\n')
