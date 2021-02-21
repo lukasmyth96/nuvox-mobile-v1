@@ -1,15 +1,14 @@
-// Variables for referencing the canvas and 2d canvas context
+/*
+    The functions in this file are all related swiping on the keypad.
+ */
+
+//  ------------------------------------------- KEYPAD VARS ------------------------------------------------------------
+
 let canvas, ctx;
 
-// Record swipe trace, a sequence of objects containing the x and y coordinates at each time-step.
-// Note - coordinates are relative to the canvas.
-let trace = [];
+let trace = [];  // list of (x, y, t) coordinate where x, y are relative top left of keypad and time is in seconds.
 let traceStartTime;
-
-// Variables to keep track of the mouse position and left-button status
 let mouseX, mouseY, mouseDown = 0;
-
-// Variables to keep track of the touch position
 let touchX, touchY;
 
 // Keep track of the old/last position when drawing a line
@@ -124,10 +123,7 @@ function onMouseMove(e) {
 // Keep track of the mouse button being released
 function onMouseUp() {
 
-    if (gameInProgress && trace.length > 0) {
-        submitSwipe();
-        setNewTargetWord();
-    }
+    handleSwipe(trace);
 
     mouseDown = 0;
     clearCanvas(canvas, ctx);
@@ -164,10 +160,7 @@ function onTouchStart() {
 
 function onTouchEnd() {
 
-    if (gameInProgress && trace.length > 0) {
-        submitSwipe();
-        setNewTargetWord();
-    }
+    handleSwipe(trace);
 
     clearCanvas(canvas, ctx);
     clearTrace();

@@ -1,10 +1,23 @@
-// JS functions related to the keyboard game.
+/*
+    The functions in this file are all related to the data collection game.
+ */
 
+//  ------------------------------------------- GAME VARS ------------------------------------------------------------
 let targetText;
-
 let gameInProgress = false;
 let gameId;
 let gameTimer;
+
+//  ------------------------------------------- SWIPE HANDLER ----------------------------------------------------------
+
+function handleSwipe(trace) {
+    if (gameInProgress && trace.length > 0) {
+        submitSwipe();
+        setNewTargetWord();
+    }
+}
+
+//  ------------------------------------------- GAME FUNCS ------------------------------------------------------------
 
 function resetTimer() {
     let secondsRemaining = 60;
@@ -31,6 +44,8 @@ function endGame() {
     $('#end-game-button').hide();
     showEndGameModal();
 }
+
+//  ------------------------------------------- LEADERBOARD FUNCS ------------------------------------------------------
 
 function showEndGameModal(leaderboardData) {
     setTimeout(function () {
@@ -75,7 +90,7 @@ function addAllColumnHeaders(selector, tableData) {
     return columnSet;
 }
 
-// AJAX REQUESTS ------------------------------------------------------------------------------------------------------
+//  ------------------------------------------- AJAX REQUESTS ----------------------------------------------------------
 function startNewGame() {
     $.ajax({
             url: '/api/games/',
