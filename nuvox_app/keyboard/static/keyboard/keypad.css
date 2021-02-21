@@ -1,5 +1,5 @@
 
-#sketchpadapp {
+#keypad-app {
     /* Prevent nearby text being highlighted when accidentally dragging mouse outside confines of the canvas */
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -9,7 +9,7 @@
     user-select: none;
 }
 
-#sketchpad {
+#keypad-canvas {
     /* Note background-url is specified inline in game.html as it references Django www so can't be here (I think). */
     margin-left: auto;
     margin-right: auto;
@@ -19,4 +19,3 @@
     position:relative; /* Necessary for correct mouse co-ords in Firefox */
     background-size: 100% 100%;
 }
-

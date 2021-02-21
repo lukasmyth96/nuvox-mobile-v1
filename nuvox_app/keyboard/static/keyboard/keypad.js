@@ -200,7 +200,7 @@ function getTouchPos(e) {
     }
 }
 
-function sketchpad_resize() {
+function keypad_resize() {
     // isMobile is defined in game.html from Django context.
     if (isMobile) {
         canvas.width = window.innerWidth;
@@ -217,7 +217,7 @@ function sketchpad_resize() {
 function onBodyLoad() {
 
     // Get the specific canvas element from the HTML document
-    canvas = document.getElementById('sketchpad');
+    canvas = document.getElementById('keypad-canvas');
 
     // If the browser supports the canvas tag, get the 2d drawing context for this canvas
     if (canvas.getContext)
@@ -227,10 +227,10 @@ function onBodyLoad() {
     if (ctx) {
 
         // First, adjust the canvas size to fit the current screen dimensions
-        sketchpad_resize();
+        keypad_resize();
 
         // React to window being resized
-        window.addEventListener('resize', sketchpad_resize, false);
+        window.addEventListener('resize', keypad_resize, false);
 
         // React to mouse events on the canvas, and mouseup on the entire document
         canvas.addEventListener('mousedown', onMouseDown, false);
