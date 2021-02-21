@@ -10,7 +10,7 @@
 }
 
 #sketchpad {
-    /* Note background-url is specified inline in keyboard.html as it references Django www so can't be here (I think). */
+    /* Note background-url is specified inline in game.html as it references Django www so can't be here (I think). */
     margin-left: auto;
     margin-right: auto;
     display: block;

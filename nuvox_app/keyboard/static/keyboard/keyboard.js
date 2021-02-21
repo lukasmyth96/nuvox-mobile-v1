@@ -208,7 +208,7 @@ function getTouchPos(e) {
 }
 
 function sketchpad_resize() {
-    // isMobile is defined in keyboard.html from Django context.
+    // isMobile is defined in game.html from Django context.
     if (isMobile) {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight * 0.8;
