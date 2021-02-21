@@ -6,4 +6,4 @@ from nuvox_algorithm import NuvoxAlgorithm
 class KeyboardConfig(AppConfig):
     name = 'keyboard'
 
-    # nuvox_algorithm = NuvoxAlgorithm()
+    nuvox_algorithm = NuvoxAlgorithm()

@@ -8,7 +8,7 @@ class TracePoint:
     x: float  # x∈(0, 1) is x coordinate relative to top-left of key pad.
     y: float  # y∈(0, 1) is y coordinate relative to top-left of key pad
     t: float  # t∈ℝ is the time (s) at which this point was recorded relative to start of swipe.
-    key_id: str  # ID (1-9) of key that this point belongs to on the keyboard.
+    key_id: Optional[str] = None  # ID (1-9) of key that this point belongs to on the keyboard.
 
     def __post_init__(self):
         assert 0.0 <= self.x <= 1.0

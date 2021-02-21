@@ -1,4 +1,6 @@
+import json
 import random
+
 from django.shortcuts import render
 from django.views.decorators.http import require_http_methods
 from django.http import JsonResponse
@@ -8,6 +10,7 @@ from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
 from english_words import english_words_lower_alpha_set
 
+from nuvox_algorithm.core import TracePoint
 from keyboard.apps import KeyboardConfig
 
 @login_required()
@@ -17,5 +20,7 @@ def keyboard(request):
 
 @login_required()
 def predict(request):
-    print('stop here')
-    return JsonResponse({'predicted_words': ['test1', 'test2']})
+    trace = json.loads(request.body.decode('utf-8'))['trace']
+    trace = [TracePoint(**point) for point in trace]
+    predicted_words = KeyboardConfig.nuvox_algorithm.predict(prompt='hello', trace=trace)
+    return JsonResponse({'predicted_words': predicted_words})
