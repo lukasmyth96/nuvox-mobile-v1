@@ -1,5 +1,11 @@
 // JS functions related to the keyboard game.
 
+let targetText;
+
+let gameInProgress = false;
+let gameId;
+let gameTimer;
+
 function resetTimer() {
     let secondsRemaining = 60;
     setCountdown(secondsRemaining);

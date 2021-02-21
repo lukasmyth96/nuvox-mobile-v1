@@ -22,13 +22,10 @@ class LanguageModel:
         model_output = self.model(token_ids)
         next_token_logits = model_output.logits[:, -1, :]
         next_token_probs = F.softmax(next_token_logits, dim=-1)
-        ranked = next_token_probs.topk(k=self.tokenizer.vocab_size)
-        ranked_token_ids = ranked.indices.tolist()[0]
-        ranked_token_probs = ranked.values.tolist()[0]
 
         token_to_predicted_prob = {
-            self.tokenizer.decode(token_id): prob
-            for token_id, prob in zip(ranked_token_ids, ranked_token_probs)
+            self.tokenizer.decode(idx): next_token_probs[0, idx].item()
+            for idx in range(next_token_probs.shape[1])
         }
 
         return token_to_predicted_prob

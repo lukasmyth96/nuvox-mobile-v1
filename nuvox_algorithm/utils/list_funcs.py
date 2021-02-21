@@ -12,7 +12,10 @@ def sequential_pairs(iterable: Iterable) -> List[Tuple[Any, Any]]:
 
 
 def filter_adjacent_duplicates(a_list: list) -> list:
-    return [i for i, j in sequential_pairs(a_list + [not a_list[-1]]) if i != j]
+    if a_list:
+        return [i for i, j in sequential_pairs(a_list + [not a_list[-1]]) if i != j]
+    else:
+        return a_list
 
 
 def all_subsequences(a_list: List) -> List[List[Any]]:
