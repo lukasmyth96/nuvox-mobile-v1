@@ -20,7 +20,8 @@ def keyboard(request):
 
 @login_required()
 def predict(request):
-    trace = json.loads(request.body.decode('utf-8'))['trace']
-    trace = [TracePoint(**point) for point in trace]
-    predicted_words = KeyboardConfig.nuvox_algorithm.predict(prompt='hello', trace=trace)
+    payload = json.loads(request.body.decode('utf-8'))
+    prompt = payload['prompt']
+    trace = [TracePoint(**point) for point in payload['trace']]
+    predicted_words = KeyboardConfig.nuvox_algorithm.predict(prompt=prompt, trace=trace)
     return JsonResponse({'predicted_words': predicted_words})

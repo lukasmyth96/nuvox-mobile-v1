@@ -18,6 +18,8 @@ class LanguageModel:
         return vocab
 
     def predict_next_word(self, prompt: str) -> Dict[str, float]:
+        if prompt == '':
+            prompt = '.'  # requires token to start sentence
         token_ids = self.tokenizer.encode(text=prompt, return_tensors="pt")
         model_output = self.model(token_ids)
         next_token_logits = model_output.logits[:, -1, :]

@@ -6,20 +6,27 @@
  */
 
 function handleSwipe(trace){
-    getPrediction(trace);
+    const textBox = document.getElementById('text-box');
+    const prompt = textBox.value;
+    if (trace.length > 0) {
+        getPrediction(prompt, trace);
+    } else {
+        console.log("Skipping prediction request as trace is empty...")
+    }
 }
 
 
 //  ------------------------------------------- AJAX REQUESTS ----------------------------------------------------------
 
 
-function getPrediction(trace) {
+function getPrediction(prompt, trace) {
 
     $.ajax({
             url: '/api/predict/',
             type: 'POST',
             contentType: 'application/json',
             data: JSON.stringify({
+                "prompt": prompt,
                 "trace": trace
             }),
             beforeSend: function (xhr) {
