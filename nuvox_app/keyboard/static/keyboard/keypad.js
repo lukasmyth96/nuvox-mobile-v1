@@ -201,12 +201,17 @@ function getTouchPos(e) {
 }
 
 function keypad_resize() {
+
+    const mainDiv = document.getElementById('main-div');
+    const mainDivWidth = mainDiv.getBoundingClientRect().width;
+    console.log(`main div width is ${mainDivWidth}`);
+
     // isMobile is defined in game.html from Django context.
     if (isMobile) {
-        canvas.width = window.innerWidth;
+        canvas.width = mainDivWidth;
         canvas.height = window.innerHeight * 0.8;
     } else {
-        canvas.width = window.innerWidth * 0.4;
+        canvas.width = mainDivWidth;
         canvas.height = window.innerHeight * 0.8;
     }
 }
