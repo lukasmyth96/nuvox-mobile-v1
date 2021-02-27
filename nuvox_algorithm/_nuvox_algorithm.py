@@ -48,7 +48,7 @@ class NuvoxAlgorithm:
         ranked_words = [self.language_model.tokenizer.convert_tokens_to_string(w) for w in ranked_words]
         if prompt == '':
             ranked_words = [w.lstrip().capitalize() for w in ranked_words]
-        print('Ranked words: ', ranked_words[:10])
+        print('Ranked words: ', ranked_words)
 
         return ranked_words
 
