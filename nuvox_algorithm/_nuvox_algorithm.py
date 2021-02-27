@@ -2,6 +2,7 @@ from collections import defaultdict
 from typing import List, Dict
 
 from nuvox_algorithm.utils.dict_funcs import ranked_keys
+from nuvox_algorithm.utils.list_funcs import filter_duplicates
 from nuvox_algorithm.core import nuvox_keyboard, TracePoint
 from nuvox_algorithm.language_model import LanguageModel
 from nuvox_algorithm.trace_algorithm import TraceAlgorithm
@@ -48,6 +49,7 @@ class NuvoxAlgorithm:
         ranked_words = [self.language_model.tokenizer.convert_tokens_to_string(w) for w in ranked_words]
         if prompt == '':
             ranked_words = [w.lstrip().capitalize() for w in ranked_words]
+        ranked_words = filter_duplicates(ranked_words)
         print('Ranked words: ', ranked_words)
 
         return ranked_words
