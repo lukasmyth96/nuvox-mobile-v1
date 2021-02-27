@@ -18,6 +18,15 @@ def filter_adjacent_duplicates(a_list: list) -> list:
         return a_list
 
 
+def filter_duplicates(a_list: list) -> list:
+    """Filters duplicates whilst preserving order."""
+    filtered_list = []
+    for item in a_list:
+        if item not in filtered_list:
+            filtered_list.append(item)
+    return filtered_list
+
+
 def all_subsequences(a_list: List) -> List[List[Any]]:
     """Returns all sub-sequences of a list.
 
