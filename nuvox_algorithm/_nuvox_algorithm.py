@@ -1,3 +1,4 @@
+from collections import defaultdict
 from typing import List, Dict
 
 from nuvox_algorithm.utils.dict_funcs import ranked_keys
@@ -16,49 +17,45 @@ class NuvoxAlgorithm:
             token: self.keyboard.text_to_kis(text=token, skip_invalid_chars=True)
             for token in self.language_model.vocab
         }
+        self.kis_to_tokens = defaultdict(list)
+        for token, kis in self.token_to_kis.items():
+            self.kis_to_tokens[kis].append(token)
 
     def predict(self, prompt: str, trace: List[TracePoint]) -> List[str]:
-
-        # Language Model
-        token_to_lang_model_pred_prob = self.language_model.predict_next_word(prompt=prompt)
 
         # Trace Algorithm
         kis_to_trace_algo_pred_prob = self.trace_algorithm.predict_intended_kis(trace=trace)
         token_to_trace_algo_pred_prob = {
-            token: kis_to_trace_algo_pred_prob.get(self.token_to_kis[token], 0.0)
-            for token in self.language_model.vocab
+            token: prob
+            for kis, prob in kis_to_trace_algo_pred_prob.items()
+            for token in self.kis_to_tokens[kis]
         }
 
-        # Combine Predictions
+        # Language Model
+        possible_tokens = list(token_to_trace_algo_pred_prob)
+        token_to_lang_model_pred_prob = self.language_model.predict_next_token(
+            prompt=prompt,
+            possible_tokens=possible_tokens
+        )
+
+        # Calculate Joint Probability
         token_to_joint_prob = self.joint_prob(
             token_to_trace_algo_pred_prob,
             token_to_lang_model_pred_prob
         )
 
-        top_n_words = ranked_keys(token_to_joint_prob)[:10]
+        ranked_words = ranked_keys(token_to_joint_prob)
 
-        return top_n_words
-
+        return ranked_words
 
     def joint_prob(self,
                    token_to_trace_algo_prob: Dict[str, float],
                    token_to_lang_model_prob: Dict[str, float]) -> Dict[str, float]:
         """Returns dict mapping each token to the joint probability from
         the trace algorithm and laguage model"""
+        possible_tokens = set(token_to_trace_algo_prob)
+        assert possible_tokens == set(token_to_lang_model_prob)
         return {
             token: (token_to_lang_model_prob.get(token, 0.0) * token_to_trace_algo_prob.get(token, 0.0))
-            for token in self.language_model.vocab
+            for token in possible_tokens
         }
-
-
-if __name__ == '__main__':
-    import random
-    from nuvox_algorithm.trace_algorithm.utils import load_train_set
-    _swipes = load_train_set()
-    _nuvox = NuvoxAlgorithm()
-    random.shuffle(_swipes)
-    for swipe in _swipes:
-        _prompt = input(f'Type suitable prompt for: "{swipe.target_text}": ')
-        top_n = _nuvox.predict(_prompt, swipe.trace)
-        print(f'Correct: {swipe.target_text}\n'
-              f'Top-n: {" ".join(top_n)}\n')
