@@ -21,7 +21,7 @@ function handleSuggestionClick(suggestionButton){
     const textBox = document.getElementById('text-box');
     let text = textBox.value;
     const words = text.split(" ");
-    words.pop();
+    suggestionButton.textContent = words.pop();
     words.push(suggestion.trim());
     text = words.join(" ");
     textBox.value = text;
