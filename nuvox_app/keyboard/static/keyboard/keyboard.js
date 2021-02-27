@@ -35,9 +35,22 @@ function getPrediction(prompt, trace) {
             dataType: 'json',
         }
     ).done(function (data) {
-        console.log(data.predicted_words);
+        // Update text box.
         const textBox = document.getElementById('text-box');
-        textBox.value += `${data.predicted_words[0]}`;
+        const topPredictedWord = data.predicted_words[0];
+        if (topPredictedWord !== undefined) {
+            textBox.value += topPredictedWord;
+        }
+
+        // Update suggestions.
+        for (let idx = 1; idx < 4; idx++) {
+            let suggestion = data.predicted_words;
+            let suggestionButton = doccument.getElementById(`suggestion=${idx}`);
+            suggestionButton.value = "";
+            if (suggestion !== undefined) {
+                suggestionButton.value = suggestion;
+            }
+        }
 
     }).fail(function (jqXHR, exception) {
             alert('Oops something went wrong :(');
