@@ -19,7 +19,7 @@ class LanguageModel:
         that the token is the next token following the text prompt."""
 
         if prompt == '':
-            prompt = '.'  # requires token to start sentence
+            prompt = self.tokenizer.bos_token  # requires token to start sentence
 
         token_ids = self.tokenizer.encode(text=prompt, return_tensors="pt")
 
