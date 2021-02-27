@@ -24,9 +24,4 @@ def predict(request):
     prompt = payload['prompt']
     trace = [TracePoint(**point) for point in payload['trace']]
     predicted_words = KeyboardConfig.nuvox_algorithm.predict(prompt=prompt, trace=trace)
-    if prompt:
-        predicted_words = [word.lower() for word in predicted_words]
-    else:
-        predicted_words = [word.capitalize() for word in predicted_words]
-    print(f'{prompt}...', predicted_words)
     return JsonResponse({'predicted_words': predicted_words})
