@@ -27,7 +27,7 @@
 <header>
 </header>
 <main>
-    <div {% if request|is_pc %} style="margin: 0 25%" {% endif %}>
+    <div id="main-div" {% if request|is_pc %} style="margin: 0 25%" {% endif %}>
         {% block content %}
         {% endblock %}
     </div>

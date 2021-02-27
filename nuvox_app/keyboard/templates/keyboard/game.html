@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_filters %}
+
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'keyboard/keypad.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'keyboard/game.css' %}">
+    <script src={% static 'keyboard/keypad.js' %}></script>
+    <script src={% static 'keyboard/game.js' %}></script>
+    {{ is_mobile|json_script:"is_mobile" }}
+    <script>
+        const isMobile = JSON.parse(document.getElementById('is_mobile').textContent);
+    </script>
+    <script>
+        const csrfToken = '{{ csrf_token }}';
+    </script>
+{% endblock head %}
+
+{% block content %}
+    <div id="top-section-container" class="container">
+      <div class="row">
+        <div class="col-sm d-flex justify-content-center">
+            <button id="start-game-button" class="btn btn-success btn-lg" onclick="startNewGame()">
+                Start Game
+            </button>
+            <button id="end-game-button" class="btn btn-danger btn-lg" style="display: none" onclick="endGame()">
+                End Game
+            </button>
+        </div>
+        <div class="col-sm d-flex justify-content-center">
+            <h1 id="target-word" style="display: none">
+                <!--Element text is set dynamically by js.-->
+            </h1>
+        </div>
+        <div class="col-sm d-flex justify-content-center">
+            <h1 id="countdown"></h1>
+        </div>
+      </div>
+    </div>
+    {% include "keyboard/_keypad.html" %}
+
+    {% include "keyboard/_game_over_modal.html" %}
+{% endblock %}

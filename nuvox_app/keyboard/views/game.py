@@ -12,15 +12,10 @@ from keyboard.models import DataCollectionSwipe, DeviceType
 from keyboard.serializers import DataCollectionSwipeSerializer
 from keyboard.validators import trace_matches_target_text
 
-
-def home(request):
-    return render(request=request, template_name='home.html')
-
-
 @login_required()
-def keyboard(request):
+def game(request):
     context = {'is_mobile': request.user_agent.is_mobile}
-    return render(request=request, template_name='keyboard/keyboard.html', context=context)
+    return render(request=request, template_name='keyboard/game.html', context=context)
 
 
 @require_http_methods(['GET'])

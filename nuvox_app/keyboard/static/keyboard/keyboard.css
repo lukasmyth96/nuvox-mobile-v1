@@ -1,49 +1,13 @@
-#top-section-container{
+.top-section-container{
     height: 20vh;
-    padding-top: 10vh;
 }
 
-#target-word{
-    font-weight: bolder;
+#text-box {
+    width: 100%;
+    font-size: 18pt;
 }
 
-#sketchpadapp {
-    /* Prevent nearby text being highlighted when accidentally dragging mouse outside confines of the canvas */
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-}
-
-#sketchpad {
-    /* Note background-url is specified inline in keyboard.html as it references Django www so can't be here (I think). */
-    margin-left: auto;
-    margin-right: auto;
-    display: block;
-    border:2px solid #888;
-    border-radius:4px;
-    position:relative; /* Necessary for correct mouse co-ords in Firefox */
-    background-size: 100% 100%;
-}
-
-#game-over-modal {
-    overflow: auto !important;
-}
-
-table {
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-}
-
-td, th {
-  border: 1px solid #dddddd;
-  text-align: left;
-  padding: 8px;
-}
-
-tr:nth-child(even) {
-  background-color: #dddddd;
+.suggestion-btn {
+    width: 100%;
+    height: 100%;
 }

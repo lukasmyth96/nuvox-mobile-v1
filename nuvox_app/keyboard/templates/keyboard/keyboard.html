@@ -4,9 +4,9 @@
 
 {% block head %}
     <link rel="stylesheet" type="text/css" href="{% static 'keyboard/keyboard.css' %}">
-    <script src={% static 'keyboard/keyboard_ajax.js' %}></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'keyboard/keypad.css' %}">
     <script src={% static 'keyboard/keyboard.js' %}></script>
-    <script src={% static 'keyboard/game.js' %}></script>
+    <script src={% static 'keyboard/keypad.js' %}></script>
     {{ is_mobile|json_script:"is_mobile" }}
     <script>
         const isMobile = JSON.parse(document.getElementById('is_mobile').textContent);
@@ -17,31 +17,22 @@
 {% endblock head %}
 
 {% block content %}
-    <div id="top-section-container" class="container">
-      <div class="row">
-        <div class="col-sm d-flex justify-content-center">
-            <button id="start-game-button" class="btn btn-success btn-lg" onclick="startNewGame()">
-                Start Game
-            </button>
-            <button id="end-game-button" class="btn btn-danger btn-lg" style="display: none" onclick="endGame()">
-                End Game
-            </button>
-        </div>
-        <div class="col-sm d-flex justify-content-center">
-            <h1 id="target-word" style="display: none">
-                <!--Element text is set dynamically by js.-->
-            </h1>
-        </div>
-        <div class="col-sm d-flex justify-content-center">
-            <h1 id="countdown"></h1>
-        </div>
+      <div class="top-section-container">
+          <div class="row no-gutters" style="height: 50%">
+              <input style="font-size: x-large" id="text-box">
+          </div>
+          <div class="row no-gutters" style="height: 50%; font-size: x-large">
+                <div class="col-sm d-flex justify-content-center">
+                    <button id="suggestion-1" class="suggestion-btn" onclick="handleSuggestionClick(this)"></button>
+                </div>
+                <div class="col-sm d-flex justify-content-center">
+                    <button id="suggestion-2" class="suggestion-btn" onclick="handleSuggestionClick(this)"></button>
+                </div>
+                <div class="col-sm d-flex justify-content-center">
+                    <button id="suggestion-3" class="suggestion-btn" onclick="handleSuggestionClick(this)"></button>
+                </div>
+          </div>
       </div>
-    </div>
-    <div id="sketchpadapp">
-        <canvas id="sketchpad"
-                style="background-image: url({% static "keyboard/assets/nuvox_keyboard_img.png" %})">
-        </canvas>
-    </div>
+    {% include "keyboard/_keypad.html" %}
 
-    {% include "keyboard/_game_over_modal.html" %}
 {% endblock %}
