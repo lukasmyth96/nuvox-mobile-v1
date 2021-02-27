@@ -15,6 +15,18 @@ function handleSwipe(trace){
     }
 }
 
+// ------------------------------------------- HANDLE SUGGESTIONS ------------------------------------------------------
+function handleSuggestionClick(suggestionButton){
+    const suggestion = suggestionButton.textContent;
+    const textBox = document.getElementById('text-box');
+    let text = textBox.value;
+    const words = text.split(" ");
+    words.pop();
+    words.push(suggestion.trim());
+    text = words.join(" ");
+    textBox.value = text;
+}
+
 
 //  ------------------------------------------- AJAX REQUESTS ----------------------------------------------------------
 
