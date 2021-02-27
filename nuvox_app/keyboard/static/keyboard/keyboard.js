@@ -46,9 +46,9 @@ function getPrediction(prompt, trace) {
         for (let idx = 1; idx < 4; idx++) {
             let suggestion = data.predicted_words;
             let suggestionButton = document.getElementById(`suggestion-${idx}`);
-            suggestionButton.value = "";
+            suggestionButton.textContent = "";
             if (suggestion !== undefined) {
-                suggestionButton.value = suggestion;
+                suggestionButton.textContent = suggestion;
             }
         }
 
