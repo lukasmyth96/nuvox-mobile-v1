@@ -60,6 +60,6 @@ class NuvoxAlgorithm:
         possible_tokens = set(token_to_trace_algo_prob)
         assert possible_tokens == set(token_to_lang_model_prob)
         return {
-            token: (token_to_lang_model_prob.get(token, 0.0) * token_to_trace_algo_prob.get(token, 0.0))
+            token: (token_to_lang_model_prob[token] * token_to_trace_algo_prob[token])
             for token in possible_tokens
         }

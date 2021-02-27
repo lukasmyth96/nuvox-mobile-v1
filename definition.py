@@ -14,4 +14,6 @@ TRACE_ALGORITHM_DATASET_TEST_PATH = os.path.join(REPO_ROOT_DIR, 'test.json')
 
 TRACE_ALGORITHM_SUBMISSION_PATH = os.path.join(REPO_ROOT_DIR, 'submission.json')
 
+LANGUAGE_MODEL_VOCAB_PATH = os.path.join(REPO_ROOT_DIR, 'nuvox_algorithm', 'language_model', 'cleaned_vocab.json')
+
 KEYBOARD_IMAGE_PATH = os.path.join(REPO_ROOT_DIR, 'nuvox_app', 'keyboard', 'static', 'keyboard', 'assets', 'nuvox_keyboard_img.png')
