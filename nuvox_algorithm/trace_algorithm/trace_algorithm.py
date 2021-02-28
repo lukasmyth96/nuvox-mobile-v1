@@ -5,7 +5,7 @@ import numpy as np
 
 from nuvox_algorithm.core import nuvox_keyboard, TracePoint
 from nuvox_algorithm.utils.list_funcs import filter_adjacent_duplicates
-from nuvox_algorithm.trace_algorithm.utils import rdp, angle
+from nuvox_algorithm.trace_algorithm.utils import rdp, angle, get_corner_to_corner_variants
 
 
 class TraceAlgorithm:
@@ -68,10 +68,6 @@ class TraceAlgorithm:
         # Convert list to string i.e. [1, 2, 3] --> '123' (lists cannot be keys of a dictionary)
         kis = ''.join(key_ids)
 
-        kis_to_predicted_probability = {
-            kis: 1.0
-        }
-
         if plot:
             self.plot_prediction(
                 points=points,
@@ -79,6 +75,21 @@ class TraceAlgorithm:
                 turning_point_indices=turning_point_indices,
                 predicted_kis=kis
             )
+
+        # For transitions from a corner key to an opposite corner
+        # key (excluding diagonals) (e.g. 1-->3) we cannot
+        # detect from turning points alone whether the
+        # key in between was intended or not. For now we handle
+        # this by assigning equal probability to the KIS where
+        # the middle key is/isn't added. Read docstring of
+        # 'get_corner_to_corner_variants' for further explanation.
+        corner_to_corner_variants = get_corner_to_corner_variants(kis)
+        prob = 1 / len(corner_to_corner_variants)
+
+        kis_to_predicted_probability = {
+            _kis: prob for _kis in corner_to_corner_variants
+        }
+
 
         return kis_to_predicted_probability
 
