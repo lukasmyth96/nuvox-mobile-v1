@@ -76,12 +76,13 @@ class TraceAlgorithm:
                 predicted_kis=kis
             )
 
-        # For transitions from a corner key to another corner
-        # key (excluding diagonals) e.g (1-->3, 7-->9 etc.) we
-        # cannot detect from turning points alone whether the
+        # For transitions from a corner key to an opposite corner
+        # key (excluding diagonals) (e.g. 1-->3) we cannot
+        # detect from turning points alone whether the
         # key in between was intended or not. For now we handle
         # this by assigning equal probability to the KIS where
-        # the middle key is/isn't added.
+        # the middle key is/isn't added. Read docstring of
+        # 'get_corner_to_corner_variants' for further explanation.
         corner_to_corner_variants = get_corner_to_corner_variants(kis)
         prob = 1 / len(corner_to_corner_variants)
 
