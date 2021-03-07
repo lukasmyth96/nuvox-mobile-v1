@@ -1,6 +1,10 @@
 # nuvox-mobile
 ***
 
+### Note
+This repo has been superseded by a new and improved [backend](https://github.com/lukasmyth96/nuvox-mobile-backend) and [frontend](https://github.com/lukasmyth96/nuvox-mobile-frontend). The code here served as an MVP for the nuvox mobile keyboard and was used to
+collect a dataset for, an host a [competition](#trace-algorithm-competition) to develop the nuvox algorithm.
+
 Table of Contents
 =================
 
